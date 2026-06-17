@@ -1,0 +1,15 @@
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\bin\Debug\net10.0\Stay.Catalog.Domain.deps.json
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\bin\Debug\net10.0\Stay.Catalog.Domain.dll
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\bin\Debug\net10.0\Stay.Catalog.Domain.pdb
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\bin\Debug\net10.0\Stay.BuildingBlocks.dll
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\bin\Debug\net10.0\Stay.BuildingBlocks.pdb
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\obj\Debug\net10.0\Stay.Catalog.Domain.csproj.AssemblyReference.cache
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\obj\Debug\net10.0\Stay.Catalog.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\obj\Debug\net10.0\Stay.Catalog.Domain.AssemblyInfoInputs.cache
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\obj\Debug\net10.0\Stay.Catalog.Domain.AssemblyInfo.cs
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\obj\Debug\net10.0\Stay.Catalog.Domain.csproj.CoreCompileInputs.cache
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\obj\Debug\net10.0\Stay.Cat.4CC5B6A4.Up2Date
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\obj\Debug\net10.0\Stay.Catalog.Domain.dll
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\obj\Debug\net10.0\refint\Stay.Catalog.Domain.dll
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\obj\Debug\net10.0\Stay.Catalog.Domain.pdb
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Domain\obj\Debug\net10.0\ref\Stay.Catalog.Domain.dll

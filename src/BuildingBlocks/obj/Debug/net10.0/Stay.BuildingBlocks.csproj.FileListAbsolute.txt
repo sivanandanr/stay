@@ -1,0 +1,11 @@
+C:\Projects\Stay\src\BuildingBlocks\bin\Debug\net10.0\Stay.BuildingBlocks.deps.json
+C:\Projects\Stay\src\BuildingBlocks\bin\Debug\net10.0\Stay.BuildingBlocks.dll
+C:\Projects\Stay\src\BuildingBlocks\bin\Debug\net10.0\Stay.BuildingBlocks.pdb
+C:\Projects\Stay\src\BuildingBlocks\obj\Debug\net10.0\Stay.BuildingBlocks.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Stay\src\BuildingBlocks\obj\Debug\net10.0\Stay.BuildingBlocks.AssemblyInfoInputs.cache
+C:\Projects\Stay\src\BuildingBlocks\obj\Debug\net10.0\Stay.BuildingBlocks.AssemblyInfo.cs
+C:\Projects\Stay\src\BuildingBlocks\obj\Debug\net10.0\Stay.BuildingBlocks.csproj.CoreCompileInputs.cache
+C:\Projects\Stay\src\BuildingBlocks\obj\Debug\net10.0\Stay.BuildingBlocks.dll
+C:\Projects\Stay\src\BuildingBlocks\obj\Debug\net10.0\refint\Stay.BuildingBlocks.dll
+C:\Projects\Stay\src\BuildingBlocks\obj\Debug\net10.0\Stay.BuildingBlocks.pdb
+C:\Projects\Stay\src\BuildingBlocks\obj\Debug\net10.0\ref\Stay.BuildingBlocks.dll

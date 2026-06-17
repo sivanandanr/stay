@@ -1,0 +1,25 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Stay.Api/Stay.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/Stay.BuildingBlocks.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Booking/">
+    <Project Path="src/Modules/Booking/Stay.Booking.Application/Stay.Booking.Application.csproj" />
+    <Project Path="src/Modules/Booking/Stay.Booking.Contracts/Stay.Booking.Contracts.csproj" />
+    <Project Path="src/Modules/Booking/Stay.Booking.Domain/Stay.Booking.Domain.csproj" />
+    <Project Path="src/Modules/Booking/Stay.Booking.Infrastructure/Stay.Booking.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Catalog/">
+    <Project Path="src/Modules/Catalog/Stay.Catalog.Application/Stay.Catalog.Application.csproj" />
+    <Project Path="src/Modules/Catalog/Stay.Catalog.Contracts/Stay.Catalog.Contracts.csproj" />
+    <Project Path="src/Modules/Catalog/Stay.Catalog.Domain/Stay.Catalog.Domain.csproj" />
+    <Project Path="src/Modules/Catalog/Stay.Catalog.Infrastructure/Stay.Catalog.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+  <Folder Name="/tests/ArchitectureTests/">
+    <Project Path="tests/ArchitectureTests/Stay.ArchitectureTests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,11 @@
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Contracts\bin\Debug\net10.0\Stay.Catalog.Contracts.deps.json
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Contracts\bin\Debug\net10.0\Stay.Catalog.Contracts.dll
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Contracts\bin\Debug\net10.0\Stay.Catalog.Contracts.pdb
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Contracts\obj\Debug\net10.0\Stay.Catalog.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Contracts\obj\Debug\net10.0\Stay.Catalog.Contracts.AssemblyInfoInputs.cache
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Contracts\obj\Debug\net10.0\Stay.Catalog.Contracts.AssemblyInfo.cs
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Contracts\obj\Debug\net10.0\Stay.Catalog.Contracts.csproj.CoreCompileInputs.cache
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Contracts\obj\Debug\net10.0\Stay.Catalog.Contracts.dll
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Contracts\obj\Debug\net10.0\refint\Stay.Catalog.Contracts.dll
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Contracts\obj\Debug\net10.0\Stay.Catalog.Contracts.pdb
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Contracts\obj\Debug\net10.0\ref\Stay.Catalog.Contracts.dll

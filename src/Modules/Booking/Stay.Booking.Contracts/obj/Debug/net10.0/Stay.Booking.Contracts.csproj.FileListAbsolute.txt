@@ -1,0 +1,11 @@
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\bin\Debug\net10.0\Stay.Booking.Contracts.deps.json
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\bin\Debug\net10.0\Stay.Booking.Contracts.dll
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\bin\Debug\net10.0\Stay.Booking.Contracts.pdb
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\Stay.Booking.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\Stay.Booking.Contracts.AssemblyInfoInputs.cache
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\Stay.Booking.Contracts.AssemblyInfo.cs
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\Stay.Booking.Contracts.csproj.CoreCompileInputs.cache
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\Stay.Booking.Contracts.dll
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\refint\Stay.Booking.Contracts.dll
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\Stay.Booking.Contracts.pdb
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\ref\Stay.Booking.Contracts.dll

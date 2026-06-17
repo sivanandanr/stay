@@ -1,0 +1,17 @@
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\bin\Debug\net10.0\Stay.Booking.Application.deps.json
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\bin\Debug\net10.0\Stay.Booking.Application.dll
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\bin\Debug\net10.0\Stay.Booking.Application.pdb
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\bin\Debug\net10.0\Stay.Booking.Domain.dll
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\bin\Debug\net10.0\Stay.BuildingBlocks.dll
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\bin\Debug\net10.0\Stay.Booking.Domain.pdb
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\bin\Debug\net10.0\Stay.BuildingBlocks.pdb
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\Stay.Booking.Application.csproj.AssemblyReference.cache
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\Stay.Booking.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\Stay.Booking.Application.AssemblyInfoInputs.cache
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\Stay.Booking.Application.AssemblyInfo.cs
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\Stay.Booking.Application.csproj.CoreCompileInputs.cache
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\Stay.Boo.1710A103.Up2Date
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\Stay.Booking.Application.dll
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\refint\Stay.Booking.Application.dll
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\Stay.Booking.Application.pdb
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\ref\Stay.Booking.Application.dll

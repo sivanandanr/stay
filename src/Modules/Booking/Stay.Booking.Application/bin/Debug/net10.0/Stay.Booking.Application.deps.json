@@ -1,0 +1,56 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Stay.Booking.Application/1.0.0": {
+        "dependencies": {
+          "Stay.Booking.Domain": "1.0.0",
+          "Stay.BuildingBlocks": "1.0.0"
+        },
+        "runtime": {
+          "Stay.Booking.Application.dll": {}
+        }
+      },
+      "Stay.Booking.Domain/1.0.0": {
+        "dependencies": {
+          "Stay.BuildingBlocks": "1.0.0"
+        },
+        "runtime": {
+          "Stay.Booking.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Stay.BuildingBlocks/1.0.0": {
+        "runtime": {
+          "Stay.BuildingBlocks.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Stay.Booking.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Stay.Booking.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Stay.BuildingBlocks/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
