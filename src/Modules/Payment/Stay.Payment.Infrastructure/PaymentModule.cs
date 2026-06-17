@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Stay.BuildingBlocks;
 using Stay.BuildingBlocks.Http;
 using Stay.Payment.Contracts;
+using Stay.Payment.Infrastructure.Disputes;
 using Stay.Payment.Infrastructure.Payouts;
 using Stay.Payment.Infrastructure.Reconciliation;
 using Stay.Payment.Infrastructure.Webhooks;
@@ -33,6 +34,7 @@ public sealed class PaymentModule : IModule
         services.AddSingleton(sp => new PaymentReconciler(connectionString, sp.GetRequiredService<IPaymentGateway>()));
         services.AddSingleton(sp => new LedgerReconciler(connectionString, sp.GetRequiredService<IPaymentGateway>()));
         services.AddSingleton(sp => new PayoutService(connectionString, sp.GetRequiredService<IPayoutGateway>()));
+        services.AddSingleton(new DisputeService(connectionString));
         services.AddHostedService<PaymentReconcilerService>();
     }
 
@@ -63,6 +65,25 @@ public sealed class PaymentModule : IModule
             Results.Ok(await reconciler.ReconcileAsync(cutoff ?? DateTimeOffset.UtcNow, ct: ct)))
         .RequireAuthorization("ops")
         .WithName("ReconcileLedger");
+
+        // Finance opens a dispute (typically webhook-fed; idempotent by PSP dispute id).
+        endpoints.MapPost("/api/v1/admin/disputes", async (
+            OpenDisputeRequest request, DisputeService disputes, CancellationToken ct) =>
+            (await disputes.OpenAsync(request, ct)).ToHttp(d => Results.Created($"/api/v1/admin/disputes/{d.Id}", d)))
+        .RequireAuthorization("ops")
+        .WithName("OpenDispute");
+
+        // Finance resolves a dispute (WON/LOST/ACCEPTED, mandatory note, audited §10).
+        endpoints.MapPost("/api/v1/admin/disputes/{disputeId:long}/resolve", async (
+            long disputeId, ResolveDisputeRequest request, ClaimsPrincipal user, DisputeService disputes, CancellationToken ct) =>
+        {
+            var sub = user.Subject();
+            if (string.IsNullOrWhiteSpace(sub))
+                return ResultHttpExtensions.Problem(new Error("unauthenticated", "Token has no subject claim.", ErrorType.Unauthorized));
+            return (await disputes.ResolveAsync(disputeId, sub, request.Outcome, request.Resolution, ct)).ToHttp(Results.Ok);
+        })
+        .RequireAuthorization("ops")
+        .WithName("ResolveDispute");
     }
 
     private sealed record ExecutePayoutBody(string LinkedAccountRef);

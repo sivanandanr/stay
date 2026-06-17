@@ -70,6 +70,20 @@ internal static class PaymentSchema
             net        NUMERIC(12,2) NOT NULL
         );
 
+        CREATE TABLE payment.dispute (
+            id             BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+            payment_id     BIGINT      NOT NULL REFERENCES payment.payment(id),
+            psp_dispute_id TEXT        NOT NULL UNIQUE,
+            reason         TEXT,
+            amount         NUMERIC(12,2) NOT NULL,
+            currency       CHAR(3)     NOT NULL,
+            status         TEXT        NOT NULL DEFAULT 'OPEN'
+                           CHECK (status IN ('OPEN','UNDER_REVIEW','WON','LOST','ACCEPTED')),
+            resolution     TEXT,
+            created_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
+            resolved_at    TIMESTAMPTZ
+        );
+
         CREATE TABLE payment.outbox_message (
             id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
             type TEXT NOT NULL, payload JSONB NOT NULL,

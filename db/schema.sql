@@ -581,6 +581,22 @@ CREATE TABLE payment.payout_line (
 );
 CREATE INDEX idx_payout_line_payout ON payment.payout_line (payout_id);
 
+-- Chargebacks / disputes raised by the PSP (opened from a webhook; resolved by finance, audited §10).
+CREATE TABLE payment.dispute (
+    id             BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    payment_id     BIGINT      NOT NULL REFERENCES payment.payment(id),
+    psp_dispute_id TEXT        NOT NULL UNIQUE,          -- idempotency: one row per PSP dispute
+    reason         TEXT,
+    amount         NUMERIC(12,2) NOT NULL,
+    currency       CHAR(3)     NOT NULL,
+    status         TEXT        NOT NULL DEFAULT 'OPEN'
+                   CHECK (status IN ('OPEN','UNDER_REVIEW','WON','LOST','ACCEPTED')),
+    resolution     TEXT,
+    created_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
+    resolved_at    TIMESTAMPTZ
+);
+CREATE INDEX idx_dispute_payment ON payment.dispute (payment_id);
+
 CREATE TABLE payment.outbox_message (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     type TEXT NOT NULL, payload JSONB NOT NULL,
