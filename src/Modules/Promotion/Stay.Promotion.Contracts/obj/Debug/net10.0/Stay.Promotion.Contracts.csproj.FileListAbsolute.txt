@@ -1,0 +1,12 @@
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\bin\Debug\net10.0\Stay.Promotion.Contracts.deps.json
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\bin\Debug\net10.0\Stay.Promotion.Contracts.dll
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\bin\Debug\net10.0\Stay.Promotion.Contracts.pdb
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\obj\Debug\net10.0\Stay.Promotion.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\obj\Debug\net10.0\Stay.Promotion.Contracts.AssemblyInfoInputs.cache
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\obj\Debug\net10.0\Stay.Promotion.Contracts.AssemblyInfo.cs
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\obj\Debug\net10.0\Stay.Promotion.Contracts.csproj.CoreCompileInputs.cache
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\obj\Debug\net10.0\Stay.Promotion.Contracts.sourcelink.json
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\obj\Debug\net10.0\Stay.Promotion.Contracts.dll
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\obj\Debug\net10.0\refint\Stay.Promotion.Contracts.dll
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\obj\Debug\net10.0\Stay.Promotion.Contracts.pdb
+C:\Projects\Stay\src\Modules\Promotion\Stay.Promotion.Contracts\obj\Debug\net10.0\ref\Stay.Promotion.Contracts.dll

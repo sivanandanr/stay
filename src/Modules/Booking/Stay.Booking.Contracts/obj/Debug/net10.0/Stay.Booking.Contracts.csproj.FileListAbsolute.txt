@@ -9,3 +9,8 @@ C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\St
 C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\refint\Stay.Booking.Contracts.dll
 C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\Stay.Booking.Contracts.pdb
 C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\ref\Stay.Booking.Contracts.dll
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\Stay.Booking.Contracts.sourcelink.json
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\bin\Debug\net10.0\Stay.BuildingBlocks.dll
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\bin\Debug\net10.0\Stay.BuildingBlocks.pdb
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\Stay.Booking.Contracts.csproj.AssemblyReference.cache
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Contracts\obj\Debug\net10.0\Stay.Boo.0D3C3A05.Up2Date

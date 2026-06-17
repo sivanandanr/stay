@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Confluent.Kafka" Version="2.6.1" />
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
+    <PackageReference Include="Dapper" Version="2.1.79" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.9" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+    <PackageReference Include="Testcontainers.Kafka" Version="4.12.0" />
+    <PackageReference Include="Testcontainers.PostgreSql" Version="4.12.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\BuildingBlocks\Stay.BuildingBlocks.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Catalog\Stay.Catalog.Contracts\Stay.Catalog.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Catalog\Stay.Catalog.Application\Stay.Catalog.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Catalog\Stay.Catalog.Infrastructure\Stay.Catalog.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Admin\Stay.Admin.Infrastructure\Stay.Admin.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\ARI\Stay.Ari.Infrastructure\Stay.Ari.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Booking\Stay.Booking.Infrastructure\Stay.Booking.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Payment\Stay.Payment.Infrastructure\Stay.Payment.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Search\Stay.Search.Infrastructure\Stay.Search.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Reviews\Stay.Reviews.Infrastructure\Stay.Reviews.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Channel\Stay.Channel.Infrastructure\Stay.Channel.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Promotion\Stay.Promotion.Infrastructure\Stay.Promotion.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Stay.Api\Stay.Api.csproj" />
+  </ItemGroup>
+
+</Project>

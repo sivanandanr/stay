@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Stay.Catalog.Application\Stay.Catalog.Application.csproj" />
+    <ProjectReference Include="..\Stay.Catalog.Contracts\Stay.Catalog.Contracts.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\Stay.BuildingBlocks.csproj" />
   </ItemGroup>
 
@@ -18,6 +19,8 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.79" />
     <PackageReference Include="Npgsql" Version="10.0.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" Version="10.0.2" />
   </ItemGroup>
 </Project>
 

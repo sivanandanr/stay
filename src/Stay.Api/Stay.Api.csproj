@@ -15,6 +15,13 @@
     <ProjectReference Include="..\BuildingBlocks\Stay.BuildingBlocks.csproj" />
     <ProjectReference Include="..\Modules\Catalog\Stay.Catalog.Infrastructure\Stay.Catalog.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Booking\Stay.Booking.Infrastructure\Stay.Booking.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Admin\Stay.Admin.Infrastructure\Stay.Admin.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Payment\Stay.Payment.Infrastructure\Stay.Payment.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Search\Stay.Search.Infrastructure\Stay.Search.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Guest\Stay.Guest.Infrastructure\Stay.Guest.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Reviews\Stay.Reviews.Infrastructure\Stay.Reviews.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Channel\Stay.Channel.Infrastructure\Stay.Channel.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Promotion\Stay.Promotion.Infrastructure\Stay.Promotion.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

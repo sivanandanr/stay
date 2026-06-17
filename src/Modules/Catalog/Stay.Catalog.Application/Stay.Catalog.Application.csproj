@@ -2,7 +2,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Stay.Catalog.Domain\Stay.Catalog.Domain.csproj" />
+    <ProjectReference Include="..\Stay.Catalog.Contracts\Stay.Catalog.Contracts.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\Stay.BuildingBlocks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.4" />
   </ItemGroup>
 
   <PropertyGroup>

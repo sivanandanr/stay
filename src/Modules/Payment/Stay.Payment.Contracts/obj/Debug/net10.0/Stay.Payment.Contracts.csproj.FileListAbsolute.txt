@@ -1,0 +1,16 @@
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\bin\Debug\net10.0\Stay.Payment.Contracts.deps.json
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\bin\Debug\net10.0\Stay.Payment.Contracts.dll
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\bin\Debug\net10.0\Stay.Payment.Contracts.pdb
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\obj\Debug\net10.0\Stay.Payment.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\obj\Debug\net10.0\Stay.Payment.Contracts.AssemblyInfoInputs.cache
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\obj\Debug\net10.0\Stay.Payment.Contracts.AssemblyInfo.cs
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\obj\Debug\net10.0\Stay.Payment.Contracts.csproj.CoreCompileInputs.cache
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\obj\Debug\net10.0\Stay.Payment.Contracts.sourcelink.json
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\obj\Debug\net10.0\Stay.Payment.Contracts.dll
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\obj\Debug\net10.0\refint\Stay.Payment.Contracts.dll
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\obj\Debug\net10.0\Stay.Payment.Contracts.pdb
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\obj\Debug\net10.0\ref\Stay.Payment.Contracts.dll
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\bin\Debug\net10.0\Stay.BuildingBlocks.dll
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\bin\Debug\net10.0\Stay.BuildingBlocks.pdb
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\obj\Debug\net10.0\Stay.Payment.Contracts.csproj.AssemblyReference.cache
+C:\Projects\Stay\src\Modules\Payment\Stay.Payment.Contracts\obj\Debug\net10.0\Stay.Pay.C9310F94.Up2Date

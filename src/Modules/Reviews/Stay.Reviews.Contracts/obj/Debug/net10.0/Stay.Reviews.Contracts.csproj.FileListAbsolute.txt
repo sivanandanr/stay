@@ -1,0 +1,16 @@
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\bin\Debug\net10.0\Stay.Reviews.Contracts.deps.json
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\bin\Debug\net10.0\Stay.Reviews.Contracts.dll
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\bin\Debug\net10.0\Stay.Reviews.Contracts.pdb
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\obj\Debug\net10.0\Stay.Reviews.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\obj\Debug\net10.0\Stay.Reviews.Contracts.AssemblyInfoInputs.cache
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\obj\Debug\net10.0\Stay.Reviews.Contracts.AssemblyInfo.cs
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\obj\Debug\net10.0\Stay.Reviews.Contracts.csproj.CoreCompileInputs.cache
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\obj\Debug\net10.0\Stay.Reviews.Contracts.sourcelink.json
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\obj\Debug\net10.0\Stay.Reviews.Contracts.dll
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\obj\Debug\net10.0\refint\Stay.Reviews.Contracts.dll
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\obj\Debug\net10.0\Stay.Reviews.Contracts.pdb
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\obj\Debug\net10.0\ref\Stay.Reviews.Contracts.dll
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\bin\Debug\net10.0\Stay.BuildingBlocks.dll
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\bin\Debug\net10.0\Stay.BuildingBlocks.pdb
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\obj\Debug\net10.0\Stay.Reviews.Contracts.csproj.AssemblyReference.cache
+C:\Projects\Stay\src\Modules\Reviews\Stay.Reviews.Contracts\obj\Debug\net10.0\Stay.Rev.96CA69EE.Up2Date

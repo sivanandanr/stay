@@ -17,3 +17,7 @@ C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Infrastructure\obj\Debug\net10
 C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Infrastructure\obj\Debug\net10.0\refint\Stay.Catalog.Infrastructure.dll
 C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Infrastructure\obj\Debug\net10.0\Stay.Catalog.Infrastructure.pdb
 C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Infrastructure\obj\Debug\net10.0\ref\Stay.Catalog.Infrastructure.dll
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Infrastructure\bin\Debug\net10.0\Stay.Catalog.Contracts.dll
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Infrastructure\bin\Debug\net10.0\Stay.Catalog.Contracts.pdb
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Infrastructure\obj\Debug\net10.0\Stay.Catalog.Infrastructure.sourcelink.json
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Infrastructure\obj\Debug\net10.0\EFCoreNpgsqlNetTopologySuite.cs

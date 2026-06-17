@@ -37,3 +37,20 @@ Performance · Security · UI/UX · Notifications · RazorPay payment gateway ·
 6. Phase 1: owner registration + admin approval in `stay-portal`.
 
 See `stay-setup.md` for full detail.
+
+## Transactional outbox (P0-A6)
+
+The reliable DB-write → publish → consume rail lives in `BuildingBlocks/Outbox`:
+
+- **`IOutboxWriter`** writes a domain event into a context's `outbox_message` table using the caller's
+  open connection + transaction, so the event commits atomically with the state change (no dual-write, BR-11).
+  See the producer at `Modules/Catalog/.../CatalogModule.cs` (`POST /api/v1/catalog/test-event`).
+- **`OutboxDispatcher`** (hosted service) polls each configured schema (`FOR UPDATE SKIP LOCKED`), publishes
+  to Kafka via **`KafkaEventPublisher`**, then marks the row processed — publish-before-commit gives
+  at-least-once; a crash mid-batch republishes on restart.
+- **`OutboxConsumer`** subscribes to the topic and dedupes by event id (`IdempotentReceiver`) so redelivery is
+  effectively-once (BR-5). The demo handler logs receipt; real consumers register their own `IIntegrationEventHandler`.
+
+Wire-up is `AddOutbox(...)` + `AddOutboxConsumer()` in `Stay.Api/Program.cs`; config under `Kafka:*` and
+`ConnectionStrings:Stay`. The round-trip + atomicity are proven in `tests/IntegrationTests` (Testcontainers
+Postgres + Kafka — Docker required to run them).

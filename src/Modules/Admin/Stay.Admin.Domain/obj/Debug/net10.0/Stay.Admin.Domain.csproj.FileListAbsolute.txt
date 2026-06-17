@@ -1,0 +1,16 @@
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\bin\Debug\net10.0\Stay.Admin.Domain.deps.json
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\bin\Debug\net10.0\Stay.Admin.Domain.dll
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\bin\Debug\net10.0\Stay.Admin.Domain.pdb
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\bin\Debug\net10.0\Stay.BuildingBlocks.dll
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\bin\Debug\net10.0\Stay.BuildingBlocks.pdb
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\obj\Debug\net10.0\Stay.Admin.Domain.csproj.AssemblyReference.cache
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\obj\Debug\net10.0\Stay.Admin.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\obj\Debug\net10.0\Stay.Admin.Domain.AssemblyInfoInputs.cache
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\obj\Debug\net10.0\Stay.Admin.Domain.AssemblyInfo.cs
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\obj\Debug\net10.0\Stay.Admin.Domain.csproj.CoreCompileInputs.cache
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\obj\Debug\net10.0\Stay.Admin.Domain.sourcelink.json
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\obj\Debug\net10.0\Stay.Adm.5B730440.Up2Date
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\obj\Debug\net10.0\Stay.Admin.Domain.dll
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\obj\Debug\net10.0\refint\Stay.Admin.Domain.dll
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\obj\Debug\net10.0\Stay.Admin.Domain.pdb
+C:\Projects\Stay\src\Modules\Admin\Stay.Admin.Domain\obj\Debug\net10.0\ref\Stay.Admin.Domain.dll

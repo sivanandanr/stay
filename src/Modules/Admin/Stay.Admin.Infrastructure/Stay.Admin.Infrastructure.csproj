@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Stay.Admin.Domain\Stay.Admin.Domain.csproj" />
+    <ProjectReference Include="..\..\Catalog\Stay.Catalog.Contracts\Stay.Catalog.Contracts.csproj" />
+    <ProjectReference Include="..\..\Reviews\Stay.Reviews.Contracts\Stay.Reviews.Contracts.csproj" />
+    <ProjectReference Include="..\..\Channel\Stay.Channel.Contracts\Stay.Channel.Contracts.csproj" />
+    <ProjectReference Include="..\..\Payment\Stay.Payment.Contracts\Stay.Payment.Contracts.csproj" />
+    <ProjectReference Include="..\..\Booking\Stay.Booking.Contracts\Stay.Booking.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Stay.BuildingBlocks.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.79" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.4" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.2" />
+  </ItemGroup>
+
+</Project>

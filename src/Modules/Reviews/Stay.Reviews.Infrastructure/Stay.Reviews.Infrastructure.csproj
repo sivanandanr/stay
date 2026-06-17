@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Stay.Reviews.Contracts\Stay.Reviews.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Stay.BuildingBlocks.csproj" />
+    <ProjectReference Include="..\..\Booking\Stay.Booking.Contracts\Stay.Booking.Contracts.csproj" />
+    <ProjectReference Include="..\..\Guest\Stay.Guest.Contracts\Stay.Guest.Contracts.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.79" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+  </ItemGroup>
+
+</Project>

@@ -6,6 +6,13 @@
     <Project Path="src/BuildingBlocks/Stay.BuildingBlocks.csproj" />
   </Folder>
   <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Admin/">
+    <Project Path="src/Modules/Admin/Stay.Admin.Domain/Stay.Admin.Domain.csproj" />
+    <Project Path="src/Modules/Admin/Stay.Admin.Infrastructure/Stay.Admin.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/ARI/">
+    <Project Path="src/Modules/ARI/Stay.Ari.Infrastructure/Stay.Ari.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/Modules/Booking/">
     <Project Path="src/Modules/Booking/Stay.Booking.Application/Stay.Booking.Application.csproj" />
     <Project Path="src/Modules/Booking/Stay.Booking.Contracts/Stay.Booking.Contracts.csproj" />
@@ -18,8 +25,34 @@
     <Project Path="src/Modules/Catalog/Stay.Catalog.Domain/Stay.Catalog.Domain.csproj" />
     <Project Path="src/Modules/Catalog/Stay.Catalog.Infrastructure/Stay.Catalog.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/Modules/Channel/">
+    <Project Path="src/Modules/Channel/Stay.Channel.Contracts/Stay.Channel.Contracts.csproj" />
+    <Project Path="src/Modules/Channel/Stay.Channel.Infrastructure/Stay.Channel.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Guest/">
+    <Project Path="src/Modules/Guest/Stay.Guest.Contracts/Stay.Guest.Contracts.csproj" />
+    <Project Path="src/Modules/Guest/Stay.Guest.Infrastructure/Stay.Guest.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Payment/">
+    <Project Path="src/Modules/Payment/Stay.Payment.Contracts/Stay.Payment.Contracts.csproj" />
+    <Project Path="src/Modules/Payment/Stay.Payment.Infrastructure/Stay.Payment.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Promotion/">
+    <Project Path="src/Modules/Promotion/Stay.Promotion.Contracts/Stay.Promotion.Contracts.csproj" />
+    <Project Path="src/Modules/Promotion/Stay.Promotion.Infrastructure/Stay.Promotion.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Reviews/">
+    <Project Path="src/Modules/Reviews/Stay.Reviews.Contracts/Stay.Reviews.Contracts.csproj" />
+    <Project Path="src/Modules/Reviews/Stay.Reviews.Infrastructure/Stay.Reviews.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Search/">
+    <Project Path="src/Modules/Search/Stay.Search.Infrastructure/Stay.Search.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/tests/" />
   <Folder Name="/tests/ArchitectureTests/">
     <Project Path="tests/ArchitectureTests/Stay.ArchitectureTests.csproj" />
+  </Folder>
+  <Folder Name="/tests/IntegrationTests/">
+    <Project Path="tests/IntegrationTests/Stay.IntegrationTests.csproj" />
   </Folder>
 </Solution>

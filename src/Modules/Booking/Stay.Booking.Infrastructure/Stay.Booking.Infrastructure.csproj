@@ -2,7 +2,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Stay.Booking.Application\Stay.Booking.Application.csproj" />
+    <ProjectReference Include="..\Stay.Booking.Contracts\Stay.Booking.Contracts.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\Stay.BuildingBlocks.csproj" />
+    <!-- Golden Rule §1.7: Booking + ARI + Pricing are one consistency unit; the hold is a single
+         DB transaction across them, so Booking calls the ARI inventory/pricing primitives directly. -->
+    <ProjectReference Include="..\..\ARI\Stay.Ari.Infrastructure\Stay.Ari.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Payment\Stay.Payment.Contracts\Stay.Payment.Contracts.csproj" />
+    <ProjectReference Include="..\..\Guest\Stay.Guest.Contracts\Stay.Guest.Contracts.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

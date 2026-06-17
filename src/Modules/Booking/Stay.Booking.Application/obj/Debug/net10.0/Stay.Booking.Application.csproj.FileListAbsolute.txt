@@ -15,3 +15,4 @@ C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\
 C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\refint\Stay.Booking.Application.dll
 C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\Stay.Booking.Application.pdb
 C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\ref\Stay.Booking.Application.dll
+C:\Projects\Stay\src\Modules\Booking\Stay.Booking.Application\obj\Debug\net10.0\Stay.Booking.Application.sourcelink.json

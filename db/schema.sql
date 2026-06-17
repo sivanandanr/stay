@@ -382,6 +382,7 @@ CREATE INDEX idx_loyalty_ledger_guest ON guest.loyalty_ledger (guest_id);
 CREATE TABLE booking.booking (
     id              BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     reference       TEXT        NOT NULL UNIQUE,           -- human-facing, checksummed
+    idempotency_key TEXT        NOT NULL UNIQUE,           -- BR-5: POST /holds replay returns this booking
     guest_id        BIGINT      NOT NULL,                  -- xref: guest.guest_profile; login required, no guest checkout
     contact_email   TEXT        NOT NULL,                  -- snapshot for this booking (defaults from profile)
     contact_phone   TEXT,
@@ -394,6 +395,7 @@ CREATE TABLE booking.booking (
     fees_amount     NUMERIC(12,2) NOT NULL DEFAULT 0,
     total_amount    NUMERIC(12,2) NOT NULL DEFAULT 0,
     hold_expires_at TIMESTAMPTZ,                           -- set while HELD (BR-3)
+    cancellation_snapshot JSONB,                           -- frozen policy at booking time (BR-2/BR-4)
     source          TEXT        NOT NULL DEFAULT 'WEB' CHECK (source IN ('WEB','MOBILE','PARTNER')),
     partner_id      BIGINT,                                -- xref: admin/partner when source=PARTNER
     created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -494,6 +496,15 @@ CREATE TABLE booking.outbox_message (
     occurred_at TIMESTAMPTZ NOT NULL DEFAULT now(), processed_at TIMESTAMPTZ
 );
 CREATE INDEX idx_booking_outbox_unprocessed ON booking.outbox_message (occurred_at) WHERE processed_at IS NULL;
+
+-- Dedupe ledger for the pre-arrival reminder scheduler: each reminder type fires at most once
+-- per booking (BR-5; scheduling math runs in the property timezone, BR-4).
+CREATE TABLE booking.reminder_log (
+    booking_id    BIGINT NOT NULL REFERENCES booking.booking(id) ON DELETE CASCADE,
+    reminder_type TEXT   NOT NULL,
+    emitted_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+    PRIMARY KEY (booking_id, reminder_type)
+);
 
 -- ============================================================================
 -- CONTEXT: payment  (gateway abstraction, refunds, webhooks, host payouts)
@@ -596,6 +607,16 @@ CREATE TABLE reviews.review (
 );
 CREATE INDEX idx_review_property ON reviews.review (property_id) WHERE status = 'PUBLISHED';
 
+-- Read model: which completed stays may be reviewed, fed by booking.BookingCompleted events.
+-- Lets the reviews context verify a review without reading the booking context (BR-6).
+CREATE TABLE reviews.reviewable_stay (
+    booking_id  BIGINT PRIMARY KEY,                        -- xref: booking.booking
+    guest_id    BIGINT  NOT NULL,                          -- xref: guest.guest_profile
+    property_id BIGINT  NOT NULL,                          -- xref: catalog.property
+    reviewed    BOOLEAN NOT NULL DEFAULT false,
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 CREATE TABLE reviews.review_response (
     id        BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     review_id BIGINT NOT NULL UNIQUE REFERENCES reviews.review(id),
@@ -621,6 +642,14 @@ CREATE TABLE reviews.property_rating_aggregate (
     sub_score_avgs JSONB,
     updated_at     TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Moderation decisions (publish/reject) emit audit-evidence events in the same transaction (§10).
+CREATE TABLE reviews.outbox_message (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    type TEXT NOT NULL, payload JSONB NOT NULL,
+    occurred_at TIMESTAMPTZ NOT NULL DEFAULT now(), processed_at TIMESTAMPTZ
+);
+CREATE INDEX idx_reviews_outbox_unprocessed ON reviews.outbox_message (occurred_at) WHERE processed_at IS NULL;
 
 -- ============================================================================
 -- CONTEXT: promotion  (platform & host promotions, coupons, redemptions)
@@ -760,6 +789,13 @@ CREATE TABLE admin.audit_log (
 );
 CREATE INDEX idx_audit_entity ON admin.audit_log (entity_type, entity_id);
 CREATE INDEX idx_audit_actor  ON admin.audit_log (actor_sub, created_at);
+
+-- Inbox/dedupe ledger: lets event projections (e.g. the host-approval audit) write admin.audit_log
+-- exactly once under at-least-once delivery (BR-5). Keyed by the integration event id.
+CREATE TABLE admin.processed_event (
+    event_id     TEXT PRIMARY KEY,
+    processed_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
 
 CREATE TABLE admin.block_list (
     id         BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,

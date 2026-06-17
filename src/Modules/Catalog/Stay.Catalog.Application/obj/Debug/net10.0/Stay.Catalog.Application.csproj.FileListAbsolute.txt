@@ -15,3 +15,6 @@ C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Application\obj\Debug\net10.0\
 C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Application\obj\Debug\net10.0\refint\Stay.Catalog.Application.dll
 C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Application\obj\Debug\net10.0\Stay.Catalog.Application.pdb
 C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Application\obj\Debug\net10.0\ref\Stay.Catalog.Application.dll
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Application\obj\Debug\net10.0\Stay.Catalog.Application.sourcelink.json
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Application\bin\Debug\net10.0\Stay.Catalog.Contracts.dll
+C:\Projects\Stay\src\Modules\Catalog\Stay.Catalog.Application\bin\Debug\net10.0\Stay.Catalog.Contracts.pdb

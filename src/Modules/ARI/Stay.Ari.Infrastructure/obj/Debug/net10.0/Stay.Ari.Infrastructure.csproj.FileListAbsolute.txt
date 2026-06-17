@@ -1,0 +1,13 @@
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\bin\Debug\net10.0\Stay.Ari.Infrastructure.deps.json
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\bin\Debug\net10.0\Stay.Ari.Infrastructure.dll
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\bin\Debug\net10.0\Stay.Ari.Infrastructure.pdb
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\obj\Debug\net10.0\Stay.Ari.Infrastructure.csproj.AssemblyReference.cache
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\obj\Debug\net10.0\Stay.Ari.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\obj\Debug\net10.0\Stay.Ari.Infrastructure.AssemblyInfoInputs.cache
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\obj\Debug\net10.0\Stay.Ari.Infrastructure.AssemblyInfo.cs
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\obj\Debug\net10.0\Stay.Ari.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\obj\Debug\net10.0\Stay.Ari.Infrastructure.sourcelink.json
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\obj\Debug\net10.0\Stay.Ari.Infrastructure.dll
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\obj\Debug\net10.0\refint\Stay.Ari.Infrastructure.dll
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\obj\Debug\net10.0\Stay.Ari.Infrastructure.pdb
+C:\Projects\Stay\src\Modules\ARI\Stay.Ari.Infrastructure\obj\Debug\net10.0\ref\Stay.Ari.Infrastructure.dll
