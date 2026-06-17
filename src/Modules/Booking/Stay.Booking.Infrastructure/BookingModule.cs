@@ -10,6 +10,7 @@ using Stay.BuildingBlocks.Http;
 using Stay.Booking.Contracts;
 using Stay.Booking.Infrastructure.Holds;
 using Stay.Booking.Infrastructure.Reminders;
+using Stay.Booking.Infrastructure.Reporting;
 using Stay.Booking.Infrastructure.Trips;
 using Stay.Guest.Contracts;
 using Stay.Payment.Contracts;
@@ -37,6 +38,7 @@ public sealed class BookingModule : IModule
         services.AddHostedService<StayCompletionServiceHost>();
         services.AddSingleton(new TripsQueryService(connectionString));
         services.AddSingleton(new ManualOverrideService(connectionString));
+        services.AddSingleton(new ReportingService(connectionString));
     }
 
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
@@ -48,7 +50,20 @@ public sealed class BookingModule : IModule
         MapCancel(endpoints);
         MapMyTrips(endpoints);
         MapOverride(endpoints);
+        MapReports(endpoints);
     }
+
+    // Ops/finance booking + revenue summary for a date window.
+    private static void MapReports(IEndpointRouteBuilder endpoints) =>
+        endpoints.MapGet("/api/v1/admin/reports/bookings", async (
+            DateTimeOffset from, DateTimeOffset to, ReportingService reporting, CancellationToken ct) =>
+        {
+            if (to <= from)
+                return ResultHttpExtensions.Problem(Error.Validation("The report window must be a non-empty range."));
+            return Results.Ok(await reporting.BookingSummaryAsync(from, to, ct));
+        })
+        .RequireAuthorization("ops")
+        .WithName("BookingReport");
 
     // Ops manually overrides a booking's status (force-cancel / no-show / complete) with a mandatory
     // reason — audited (§10). Server-side authorization from admin.role_assignment via the "ops" policy.
