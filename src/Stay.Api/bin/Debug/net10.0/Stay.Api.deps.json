@@ -15,6 +15,7 @@
           "Stay.Catalog.Infrastructure": "1.0.0",
           "Stay.Channel.Infrastructure": "1.0.0",
           "Stay.Guest.Infrastructure": "1.0.0",
+          "Stay.Loyalty.Infrastructure": "1.0.0",
           "Stay.Payment.Infrastructure": "1.0.0",
           "Stay.Promotion.Infrastructure": "1.0.0",
           "Stay.Reviews.Infrastructure": "1.0.0",
@@ -436,6 +437,7 @@
           "Stay.BuildingBlocks": "1.0.0",
           "Stay.Catalog.Contracts": "1.0.0",
           "Stay.Channel.Contracts": "1.0.0",
+          "Stay.Guest.Contracts": "1.0.0",
           "Stay.Payment.Contracts": "1.0.0",
           "Stay.Reviews.Contracts": "1.0.0"
         },
@@ -494,6 +496,7 @@
       },
       "Stay.Booking.Infrastructure/1.0.0": {
         "dependencies": {
+          "Confluent.Kafka": "2.6.1",
           "Dapper": "2.1.79",
           "Npgsql": "10.0.3",
           "Stay.Ari.Infrastructure": "1.0.0",
@@ -501,7 +504,9 @@
           "Stay.Booking.Contracts": "1.0.0",
           "Stay.BuildingBlocks": "1.0.0",
           "Stay.Guest.Contracts": "1.0.0",
-          "Stay.Payment.Contracts": "1.0.0"
+          "Stay.Loyalty.Infrastructure": "1.0.0",
+          "Stay.Payment.Contracts": "1.0.0",
+          "Stay.Promotion.Infrastructure": "1.0.0"
         },
         "runtime": {
           "Stay.Booking.Infrastructure.dll": {
@@ -607,6 +612,9 @@
         }
       },
       "Stay.Guest.Contracts/1.0.0": {
+        "dependencies": {
+          "Stay.BuildingBlocks": "1.0.0"
+        },
         "runtime": {
           "Stay.Guest.Contracts.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -623,6 +631,22 @@
         },
         "runtime": {
           "Stay.Guest.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Stay.Loyalty.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Confluent.Kafka": "2.6.1",
+          "Dapper": "2.1.79",
+          "Npgsql": "10.0.3",
+          "Stay.Booking.Contracts": "1.0.0",
+          "Stay.BuildingBlocks": "1.0.0",
+          "Stay.Guest.Contracts": "1.0.0"
+        },
+        "runtime": {
+          "Stay.Loyalty.Infrastructure.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -704,8 +728,11 @@
       },
       "Stay.Search.Infrastructure/1.0.0": {
         "dependencies": {
+          "Stay.Booking.Contracts": "1.0.0",
           "Stay.BuildingBlocks": "1.0.0",
-          "Stay.Catalog.Contracts": "1.0.0"
+          "Stay.Catalog.Contracts": "1.0.0",
+          "Stay.Channel.Contracts": "1.0.0",
+          "Stay.Reviews.Contracts": "1.0.0"
         },
         "runtime": {
           "Stay.Search.Infrastructure.dll": {
@@ -987,6 +1014,11 @@
       "sha512": ""
     },
     "Stay.Guest.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Stay.Loyalty.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

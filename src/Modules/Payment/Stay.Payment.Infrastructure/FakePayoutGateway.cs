@@ -24,4 +24,7 @@ public sealed class FakePayoutGateway : IPayoutGateway
         var pspRef = _byKey.GetOrAdd(instruction.IdempotencyKey, k => $"fake_payout_{k}");
         return Task.FromResult(PayoutResult.Ok(pspRef));
     }
+
+    public Task<GatewayPayoutStatus> GetPayoutStatusAsync(string payoutPspRef, CancellationToken ct = default) =>
+        Task.FromResult(GatewayPayoutStatus.Paid);
 }

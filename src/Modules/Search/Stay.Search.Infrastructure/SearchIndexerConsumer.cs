@@ -15,6 +15,10 @@ namespace Stay.Search.Infrastructure;
 public sealed class SearchIndexerConsumer(
     IOptions<OutboxOptions> options,
     SearchIndexProjection projection,
+    PopularityProjection popularity,
+    RatingProjection rating,
+    SearchPriceProjection price,
+    SearchAmenitiesProjection amenities,
     ILogger<SearchIndexerConsumer> logger) : BackgroundService
 {
     private const string GroupId = "stay-search-indexer";
@@ -77,9 +81,19 @@ public sealed class SearchIndexerConsumer(
     private async Task ProjectAsync(string value, CancellationToken ct)
     {
         var envelope = JsonSerializer.Deserialize<OutboxEnvelope>(value);
-        if (envelope is null || !SearchIndexProjection.Handles(envelope.Type))
-            return; // not ours — safe to commit
+        if (envelope is null)
+            return;
 
-        await projection.ProjectAsync(envelope, ct);
+        if (SearchIndexProjection.Handles(envelope.Type))
+            await projection.ProjectAsync(envelope, ct);
+        else if (PopularityProjection.Handles(envelope.Type))
+            await popularity.ProjectAsync(envelope, ct);
+        else if (RatingProjection.Handles(envelope.Type))
+            await rating.ProjectAsync(envelope, ct);
+        else if (SearchPriceProjection.Handles(envelope.Type))
+            await price.ProjectAsync(envelope, ct);
+        else if (SearchAmenitiesProjection.Handles(envelope.Type))
+            await amenities.ProjectAsync(envelope, ct);
+        // else: not ours — safe to commit
     }
 }

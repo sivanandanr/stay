@@ -5,7 +5,9 @@ using Stay.Ari.Infrastructure.Pricing;
 using Stay.BuildingBlocks;
 using Stay.Booking.Contracts;
 using Stay.Booking.Infrastructure.Holds;
+using Stay.Loyalty.Infrastructure;
 using Stay.Payment.Infrastructure;
+using Stay.Promotion.Infrastructure;
 using Testcontainers.PostgreSql;
 
 namespace Stay.IntegrationTests;
@@ -36,7 +38,7 @@ public sealed class BookingModificationTests : IAsyncLifetime
         await conn.ExecuteAsync(AriSchema.Ddl);
         await conn.ExecuteAsync(BookingSchema.Ddl);
         await conn.ExecuteAsync(PaymentSchema.Ddl);
-        _hold = new BookingHoldService(_postgres.GetConnectionString());
+        _hold = new BookingHoldService(_postgres.GetConnectionString(), new PromotionService(_postgres.GetConnectionString()), new LoyaltyService(_postgres.GetConnectionString()));
         _modify = new ModifyBookingService(_postgres.GetConnectionString());
     }
 
@@ -58,7 +60,7 @@ public sealed class BookingModificationTests : IAsyncLifetime
             Guid.NewGuid().ToString("N"), 1, "g@example.com", 99, RoomTypeId, RatePlanId,
             OldIn, OldOut, 1, 2, 0, TimeSpan.FromMinutes(15)));
         var bookingId = held.Value!.BookingId;
-        await new BookingConfirmService(_postgres.GetConnectionString(), new FakePaymentGateway()).ConfirmAsync(bookingId);
+        await new BookingConfirmService(_postgres.GetConnectionString(), new FakePaymentGateway(), new PromotionService(_postgres.GetConnectionString()), new LoyaltyService(_postgres.GetConnectionString())).ConfirmAsync(bookingId);
         return bookingId;
     }
 

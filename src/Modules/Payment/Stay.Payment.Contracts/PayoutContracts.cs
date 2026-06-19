@@ -22,6 +22,18 @@ public sealed record PayoutResult(bool Paid, string? PspRef, string? FailureReas
 public interface IPayoutGateway
 {
     Task<PayoutResult> PayoutAsync(PayoutInstruction instruction, CancellationToken ct = default);
+
+    /// <summary>Queries the authoritative PSP state of a payout — used by daily ledger reconciliation (Gate G2).</summary>
+    Task<GatewayPayoutStatus> GetPayoutStatusAsync(string payoutPspRef, CancellationToken ct = default);
+}
+
+/// <summary>The authoritative PSP state of a payout (for daily ledger reconciliation, Gate G2).</summary>
+public enum GatewayPayoutStatus
+{
+    Pending,
+    Paid,
+    Failed,
+    Unknown
 }
 
 // ── Payout generation + execution DTOs ────────────────────────────────────────

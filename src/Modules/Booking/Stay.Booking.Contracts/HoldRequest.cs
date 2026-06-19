@@ -18,7 +18,9 @@ public sealed record HoldRequest(
     short Adults,
     short Children,
     TimeSpan HoldTtl,
-    CancellationSnapshot? Cancellation = null);
+    CancellationSnapshot? Cancellation = null,
+    string? CouponCode = null,
+    int RedeemPoints = 0);
 
 /// <summary>The outcome of a successful (or idempotently-replayed) hold.</summary>
 public sealed record HoldResult(

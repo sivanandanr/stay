@@ -10,3 +10,7 @@ C:\Projects\Stay\src\Modules\Guest\Stay.Guest.Contracts\obj\Debug\net10.0\Stay.G
 C:\Projects\Stay\src\Modules\Guest\Stay.Guest.Contracts\obj\Debug\net10.0\refint\Stay.Guest.Contracts.dll
 C:\Projects\Stay\src\Modules\Guest\Stay.Guest.Contracts\obj\Debug\net10.0\Stay.Guest.Contracts.pdb
 C:\Projects\Stay\src\Modules\Guest\Stay.Guest.Contracts\obj\Debug\net10.0\ref\Stay.Guest.Contracts.dll
+C:\Projects\Stay\src\Modules\Guest\Stay.Guest.Contracts\bin\Debug\net10.0\Stay.BuildingBlocks.dll
+C:\Projects\Stay\src\Modules\Guest\Stay.Guest.Contracts\bin\Debug\net10.0\Stay.BuildingBlocks.pdb
+C:\Projects\Stay\src\Modules\Guest\Stay.Guest.Contracts\obj\Debug\net10.0\Stay.Guest.Contracts.csproj.AssemblyReference.cache
+C:\Projects\Stay\src\Modules\Guest\Stay.Guest.Contracts\obj\Debug\net10.0\Stay.Gue.6B4464C2.Up2Date

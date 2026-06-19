@@ -45,11 +45,13 @@ public sealed class ReviewModerationService(string connectionString)
             "UPDATE reviews.review SET status = @target WHERE id = @reviewId",
             new { target, reviewId }, tx, cancellationToken: ct));
 
-        if (target == "PUBLISHED")
-            await RefreshAggregateAsync(conn, tx, review.PropertyId, ct);
+        var aggregate = target == "PUBLISHED"
+            ? await RefreshAggregateAsync(conn, tx, review.PropertyId, ct)
+            : (ReviewCount: 0, AvgOverall: 0m);
 
         IIntegrationEvent @event = target == "PUBLISHED"
-            ? new ReviewPublished(Guid.NewGuid(), reviewId, review.PropertyId, actorSub, DateTimeOffset.UtcNow)
+            ? new ReviewPublished(Guid.NewGuid(), reviewId, review.PropertyId, actorSub, DateTimeOffset.UtcNow,
+                aggregate.ReviewCount, aggregate.AvgOverall)
             : new ReviewRejected(Guid.NewGuid(), reviewId, review.PropertyId, actorSub, reason!, DateTimeOffset.UtcNow);
         await conn.ExecuteAsync(new CommandDefinition(
             "INSERT INTO reviews.outbox_message (type, payload) VALUES (@type, CAST(@payload AS jsonb))",
@@ -60,12 +62,14 @@ public sealed class ReviewModerationService(string connectionString)
         return Result<ReviewResponse>.Success(review with { Status = target });
     }
 
-    private static Task RefreshAggregateAsync(NpgsqlConnection conn, NpgsqlTransaction tx, long propertyId, CancellationToken ct) =>
-        conn.ExecuteAsync(new CommandDefinition("""
+    private static async Task<(int ReviewCount, decimal AvgOverall)> RefreshAggregateAsync(
+        NpgsqlConnection conn, NpgsqlTransaction tx, long propertyId, CancellationToken ct) =>
+        await conn.QuerySingleAsync<(int ReviewCount, decimal AvgOverall)>(new CommandDefinition("""
             INSERT INTO reviews.property_rating_aggregate (property_id, review_count, avg_overall, updated_at)
             SELECT @propertyId, count(*), COALESCE(avg(overall_rating), 0), now()
             FROM reviews.review WHERE property_id = @propertyId AND status = 'PUBLISHED'
             ON CONFLICT (property_id) DO UPDATE
                 SET review_count = EXCLUDED.review_count, avg_overall = EXCLUDED.avg_overall, updated_at = now()
+            RETURNING review_count AS ReviewCount, avg_overall AS AvgOverall
             """, new { propertyId }, tx, cancellationToken: ct));
 }

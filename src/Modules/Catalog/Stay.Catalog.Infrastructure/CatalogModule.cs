@@ -21,6 +21,7 @@ using Stay.Catalog.Application.Properties.CreateProperty;
 using Stay.Catalog.Application.Properties.GetPropertyById;
 using Stay.Catalog.Application.Properties.PublishProperty;
 using Stay.Catalog.Application.Properties.RejectProperty;
+using Stay.Catalog.Application.Properties.SetAmenities;
 using Stay.Catalog.Application.Properties.SubmitForReview;
 using Stay.Catalog.Contracts;
 using Stay.Catalog.Infrastructure.Persistence;
@@ -52,6 +53,7 @@ public sealed class CatalogModule : IModule
         MapCreateProperty(endpoints);
         MapGetProperty(endpoints);
         MapAddRoomType(endpoints);
+        MapSetAmenities(endpoints);
         MapSubmitForReview(endpoints);
         MapPublishProperty(endpoints);
         MapRejectProperty(endpoints);
@@ -275,6 +277,27 @@ public sealed class CatalogModule : IModule
         })
         .RequireAuthorization()
         .WithName("AddRoomType");
+
+    // Owner-authorized: replace the amenity set of a property the caller owns. Feeds the search
+    // amenities filter via the PropertyAmenitiesUpdated event (event-carried state).
+    private static void MapSetAmenities(IEndpointRouteBuilder endpoints) =>
+        endpoints.MapPut("/api/v1/properties/{propertyId:long}/amenities", async (
+            long propertyId,
+            SetPropertyAmenitiesRequest request,
+            ClaimsPrincipal user,
+            ICommandDispatcher dispatcher,
+            CancellationToken ct) =>
+        {
+            var sub = SubjectOf(user);
+            if (string.IsNullOrWhiteSpace(sub))
+                return Unauthenticated();
+
+            var result = await dispatcher.Send(
+                new SetPropertyAmenitiesCommand(sub, propertyId, request.Amenities ?? []), ct);
+            return result.ToHttp(count => Results.Ok(new { count }));
+        })
+        .RequireAuthorization()
+        .WithName("SetPropertyAmenities");
 
     // P0-A6 producer: makes a catalog write AND emits a TestEvent in ONE transaction, so the
     // event can never exist without the state change, and vice-versa (no dual-write, BR-11).

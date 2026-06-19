@@ -7,6 +7,10 @@
     <!-- Golden Rule §1.7: Booking + ARI + Pricing are one consistency unit; the hold is a single
          DB transaction across them, so Booking calls the ARI inventory/pricing primitives directly. -->
     <ProjectReference Include="..\..\ARI\Stay.Ari.Infrastructure\Stay.Ari.Infrastructure.csproj" />
+    <!-- Atomic in-saga coupon + loyalty redemption (user-approved broadening of the confirm transaction):
+         the confirm commits the redemption in the same tx as the inventory commit. -->
+    <ProjectReference Include="..\..\Promotion\Stay.Promotion.Infrastructure\Stay.Promotion.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Loyalty\Stay.Loyalty.Infrastructure\Stay.Loyalty.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Payment\Stay.Payment.Contracts\Stay.Payment.Contracts.csproj" />
     <ProjectReference Include="..\..\Guest\Stay.Guest.Contracts\Stay.Guest.Contracts.csproj" />
   </ItemGroup>
@@ -22,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Confluent.Kafka" Version="2.6.1" />
     <PackageReference Include="Dapper" Version="2.1.79" />
     <PackageReference Include="Npgsql" Version="10.0.3" />
   </ItemGroup>

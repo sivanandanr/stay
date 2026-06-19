@@ -6,6 +6,8 @@ using Stay.Ari.Infrastructure.Pricing;
 using Stay.BuildingBlocks;
 using Stay.Booking.Contracts;
 using Stay.Booking.Infrastructure.Holds;
+using Stay.Loyalty.Infrastructure;
+using Stay.Promotion.Infrastructure;
 using Testcontainers.PostgreSql;
 
 namespace Stay.IntegrationTests;
@@ -36,7 +38,7 @@ public sealed class BookingHoldTests : IAsyncLifetime
         await conn.OpenAsync();
         await conn.ExecuteAsync(AriSchema.Ddl);
         await conn.ExecuteAsync(BookingSchema.Ddl);
-        _saga = new BookingHoldService(_postgres.GetConnectionString());
+        _saga = new BookingHoldService(_postgres.GetConnectionString(), new PromotionService(_postgres.GetConnectionString()), new LoyaltyService(_postgres.GetConnectionString()));
     }
 
     public Task DisposeAsync() => _postgres.DisposeAsync().AsTask();

@@ -15,6 +15,8 @@ public interface ICatalogDbContext
 {
     DbSet<Property> Properties { get; }
     DbSet<RoomType> RoomTypes { get; }
+    DbSet<Amenity> Amenities { get; }
+    DbSet<PropertyAmenity> PropertyAmenities { get; }
     DbSet<Host> Hosts { get; }
     DbSet<City> Cities { get; }
     DbSet<CatalogOutboxMessage> OutboxMessages { get; }

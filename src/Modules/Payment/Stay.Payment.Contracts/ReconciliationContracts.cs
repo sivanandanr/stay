@@ -1,8 +1,11 @@
 namespace Stay.Payment.Contracts;
 
-/// <summary>A divergence between a local payment record and the PSP's view of it (Gate G2).</summary>
+/// <summary>
+/// A divergence between a local money record (payment / refund / payout) and the PSP's view of it
+/// (Gate G2). <see cref="EntityType"/> distinguishes the ledger; <see cref="EntityId"/> is that row's id.
+/// </summary>
 public sealed record LedgerDelta(
-    long PaymentId, string PspRef, string LocalStatus, string GatewayStatus, string Kind);
+    string EntityType, long EntityId, string Ref, string LocalStatus, string GatewayStatus, string Kind);
 
 /// <summary>
 /// Outcome of a daily ledger reconciliation: how many payments were checked against the PSP and which

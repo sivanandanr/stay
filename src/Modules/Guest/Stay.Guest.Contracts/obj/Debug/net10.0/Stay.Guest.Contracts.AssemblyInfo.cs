@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Stay.Guest.Contracts")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d405ef31e4f37082c7e5cb5316cee7efc318482f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+059c4ca0668baeb675220ce3dd92f2ff09b770dc")]
 [assembly: System.Reflection.AssemblyProductAttribute("Stay.Guest.Contracts")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Stay.Guest.Contracts")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

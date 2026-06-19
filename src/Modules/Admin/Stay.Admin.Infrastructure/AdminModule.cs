@@ -34,6 +34,7 @@ public sealed class AdminModule : IModule
         services.AddScoped<IAuditProjection, PayoutAuditProjection>();
         services.AddScoped<IAuditProjection, BookingOverrideAuditProjection>();
         services.AddScoped<IAuditProjection, DisputeAuditProjection>();
+        services.AddScoped<IAuditProjection, GuestErasureAuditProjection>();
         services.AddHostedService<AdminAuditConsumer>();
         services.AddSingleton(new RoleService(connectionString));
 

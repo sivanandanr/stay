@@ -5,6 +5,8 @@ using Stay.Ari.Infrastructure.Inventory;
 using Stay.Ari.Infrastructure.Pricing;
 using Stay.BuildingBlocks;
 using Stay.Booking.Contracts;
+using Stay.Loyalty.Infrastructure;
+using Stay.Promotion.Infrastructure;
 
 namespace Stay.Booking.Infrastructure.Holds;
 
@@ -14,7 +16,7 @@ namespace Stay.Booking.Infrastructure.Holds;
 /// its frozen nightly breakdown, the per-night hold rows for the reaper (BR-3), a status-history row,
 /// and a BookingHeld outbox event (BR-11). Idempotent by key (BR-5).
 /// </summary>
-public sealed class BookingHoldService(string connectionString)
+public sealed class BookingHoldService(string connectionString, PromotionService promotions, LoyaltyService loyalty)
 {
     private readonly InventoryRepository _inventory = new();
     private readonly RateRepository _rates = new();
@@ -53,8 +55,43 @@ public sealed class BookingHoldService(string connectionString)
             return await FailOrReplayAsync(conn, tx, request.IdempotencyKey,
                 Error.Conflict("sold-out", "Not enough inventory for the requested dates."), ct);
 
-        // 4. Persist the held booking (everything below commits atomically with the hold above).
+        // 3b. Apply a coupon to the FROZEN price (BR-2). The discount is a read-only preview computed
+        //     here and baked into total_amount; the redemption itself commits atomically at confirm.
         var subtotal = quote.Total * request.Quantity;
+        decimal discount = 0;
+        string? couponCode = null;
+        if (!string.IsNullOrWhiteSpace(request.CouponCode))
+        {
+            var apply = await promotions.ApplyAsync(request.CouponCode, subtotal, quote.Currency, DateTimeOffset.UtcNow, ct);
+            if (!apply.IsSuccess)
+                return await FailOrReplayAsync(conn, tx, request.IdempotencyKey, apply.Error!.Value, ct);
+            discount = apply.Value!.DiscountAmount;
+            couponCode = request.CouponCode;
+        }
+
+        // 3c. Apply loyalty points to the FROZEN price (BR-2), after the coupon. Preview-only here: we
+        //     check the guest can afford the points now and freeze the discount; the points themselves
+        //     are decremented atomically at confirm. Cap the points so the discount never exceeds the
+        //     remaining bill (so we never redeem points the guest gets no value for, and total >= 0).
+        decimal loyaltyDiscount = 0;
+        int pointsRedeemed = 0;
+        if (request.RedeemPoints > 0)
+        {
+            var account = await loyalty.GetAsync(request.GuestId, ct);
+            if (account.Balance < request.RedeemPoints)
+                return await FailOrReplayAsync(conn, tx, request.IdempotencyKey,
+                    Error.Conflict("insufficient-points",
+                        $"Balance {account.Balance} is too low to redeem {request.RedeemPoints} points."), ct);
+
+            var afterCoupon = subtotal - discount;
+            var maxRedeemable = (int)decimal.Floor(afterCoupon / LoyaltyService.PointValue);
+            pointsRedeemed = Math.Min(request.RedeemPoints, maxRedeemable);
+            loyaltyDiscount = LoyaltyService.DiscountFor(pointsRedeemed);
+        }
+
+        var total = subtotal - discount - loyaltyDiscount;
+
+        // 4. Persist the held booking (everything below commits atomically with the hold above).
         var expiresAt = DateTimeOffset.UtcNow.Add(request.HoldTtl);
         var reference = $"STAY-{Guid.NewGuid():N}"[..15].ToUpperInvariant();
 
@@ -68,14 +105,17 @@ public sealed class BookingHoldService(string connectionString)
             bookingId = await conn.ExecuteScalarAsync<long>(new CommandDefinition("""
                 INSERT INTO booking.booking
                     (reference, idempotency_key, guest_id, contact_email, property_id, status,
-                     currency, room_subtotal, total_amount, hold_expires_at, cancellation_snapshot)
+                     currency, room_subtotal, total_amount, hold_expires_at, cancellation_snapshot, coupon_code,
+                     points_redeemed, loyalty_discount)
                 VALUES
                     (@reference, @IdempotencyKey, @GuestId, @ContactEmail, @PropertyId, 'HELD',
-                     @currency, @subtotal, @subtotal, @expiresAt, CAST(@cancellationJson AS jsonb))
+                     @currency, @subtotal, @total, @expiresAt, CAST(@cancellationJson AS jsonb), @couponCode,
+                     @pointsRedeemed, @loyaltyDiscount)
                 RETURNING id
                 """,
                 new { reference, request.IdempotencyKey, request.GuestId, request.ContactEmail,
-                      request.PropertyId, currency = quote.Currency, subtotal, expiresAt, cancellationJson },
+                      request.PropertyId, currency = quote.Currency, subtotal, total, expiresAt, cancellationJson, couponCode,
+                      pointsRedeemed, loyaltyDiscount },
                 tx, cancellationToken: ct));
         }
         catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.UniqueViolation)
@@ -125,7 +165,7 @@ public sealed class BookingHoldService(string connectionString)
         await tx.CommitAsync(ct);
 
         return Result<HoldResult>.Success(
-            new HoldResult(bookingId, reference, "HELD", quote.Currency, subtotal, expiresAt.UtcDateTime));
+            new HoldResult(bookingId, reference, "HELD", quote.Currency, total, expiresAt.UtcDateTime));
     }
 
     /// <summary>On a hold/price failure, roll back, then return the winner if a concurrent same-key hold committed.</summary>

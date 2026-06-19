@@ -163,3 +163,9 @@ C:\Projects\Stay\tests\ArchitectureTests\bin\Debug\net10.0\Stay.Payment.Contract
 C:\Projects\Stay\tests\ArchitectureTests\bin\Debug\net10.0\Stay.Payment.Contracts.pdb
 C:\Projects\Stay\tests\ArchitectureTests\bin\Debug\net10.0\Stay.Guest.Contracts.dll
 C:\Projects\Stay\tests\ArchitectureTests\bin\Debug\net10.0\Stay.Guest.Contracts.pdb
+C:\Projects\Stay\tests\ArchitectureTests\bin\Debug\net10.0\Stay.Promotion.Contracts.dll
+C:\Projects\Stay\tests\ArchitectureTests\bin\Debug\net10.0\Stay.Promotion.Infrastructure.dll
+C:\Projects\Stay\tests\ArchitectureTests\bin\Debug\net10.0\Stay.Promotion.Contracts.pdb
+C:\Projects\Stay\tests\ArchitectureTests\bin\Debug\net10.0\Stay.Promotion.Infrastructure.pdb
+C:\Projects\Stay\tests\ArchitectureTests\bin\Debug\net10.0\Stay.Loyalty.Infrastructure.dll
+C:\Projects\Stay\tests\ArchitectureTests\bin\Debug\net10.0\Stay.Loyalty.Infrastructure.pdb

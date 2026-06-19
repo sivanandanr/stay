@@ -110,6 +110,21 @@ public sealed class ChannelIngestService(string connectionString)
             "INSERT INTO channel.outbox_message (type, payload) VALUES (@type, CAST(@payload AS jsonb))",
             new { type = @event.EventType, payload = JsonSerializer.Serialize(@event) }, tx, cancellationToken: ct));
 
+        // Surface a "from" price to the search read model: the lowest base rate this message carried.
+        var pricedUpdates = resolved
+            .Where(r => r.Update.BasePrice is not null && !string.IsNullOrWhiteSpace(r.Update.Currency))
+            .ToList();
+        if (pricedUpdates.Count > 0)
+        {
+            var fromPrice = pricedUpdates.Min(r => r.Update.BasePrice!.Value);
+            var currency = pricedUpdates[0].Update.Currency!;
+            var priceEvent = new PropertyPriceChanged(
+                Guid.NewGuid(), propertyId.Value, fromPrice, currency, DateTimeOffset.UtcNow);
+            await conn.ExecuteAsync(new CommandDefinition(
+                "INSERT INTO channel.outbox_message (type, payload) VALUES (@type, CAST(@payload AS jsonb))",
+                new { type = priceEvent.EventType, payload = JsonSerializer.Serialize(priceEvent) }, tx, cancellationToken: ct));
+        }
+
         await tx.CommitAsync(ct);
         return Result<IngestResult>.Success(new IngestResult(IngestOutcome.Applied, message.MessageSeq, null));
     }

@@ -992,6 +992,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
+          "Confluent.Kafka": "2.6.1",
           "Dapper": "2.1.79",
           "Npgsql": "10.0.3",
           "Stay.Ari.Infrastructure": "1.0.0",
@@ -999,7 +1000,9 @@
           "Stay.Booking.Contracts": "1.0.0",
           "Stay.BuildingBlocks": "1.0.0",
           "Stay.Guest.Contracts": "1.0.0",
-          "Stay.Payment.Contracts": "1.0.0"
+          "Stay.Loyalty.Infrastructure": "1.0.0",
+          "Stay.Payment.Contracts": "1.0.0",
+          "Stay.Promotion.Infrastructure": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Stay.Booking.Infrastructure.dll": {}
@@ -1100,12 +1103,36 @@
       "Stay.Guest.Contracts/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Stay.BuildingBlocks": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Stay.Guest.Contracts.dll": {}
         },
         "runtime": {
           "bin/placeholder/Stay.Guest.Contracts.dll": {}
         }
+      },
+      "Stay.Loyalty.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Confluent.Kafka": "2.6.1",
+          "Dapper": "2.1.79",
+          "Npgsql": "10.0.3",
+          "Stay.Booking.Contracts": "1.0.0",
+          "Stay.BuildingBlocks": "1.0.0",
+          "Stay.Guest.Contracts": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Stay.Loyalty.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Stay.Loyalty.Infrastructure.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "Stay.Payment.Contracts/1.0.0": {
         "type": "project",
@@ -1119,6 +1146,35 @@
         "runtime": {
           "bin/placeholder/Stay.Payment.Contracts.dll": {}
         }
+      },
+      "Stay.Promotion.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Stay.Promotion.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Stay.Promotion.Contracts.dll": {}
+        }
+      },
+      "Stay.Promotion.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Dapper": "2.1.79",
+          "Npgsql": "10.0.3",
+          "Stay.BuildingBlocks": "1.0.0",
+          "Stay.Promotion.Contracts": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Stay.Promotion.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Stay.Promotion.Infrastructure.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -2340,10 +2396,25 @@
       "path": "../../src/Modules/Guest/Stay.Guest.Contracts/Stay.Guest.Contracts.csproj",
       "msbuildProject": "../../src/Modules/Guest/Stay.Guest.Contracts/Stay.Guest.Contracts.csproj"
     },
+    "Stay.Loyalty.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../../src/Modules/Loyalty/Stay.Loyalty.Infrastructure/Stay.Loyalty.Infrastructure.csproj",
+      "msbuildProject": "../../src/Modules/Loyalty/Stay.Loyalty.Infrastructure/Stay.Loyalty.Infrastructure.csproj"
+    },
     "Stay.Payment.Contracts/1.0.0": {
       "type": "project",
       "path": "../../src/Modules/Payment/Stay.Payment.Contracts/Stay.Payment.Contracts.csproj",
       "msbuildProject": "../../src/Modules/Payment/Stay.Payment.Contracts/Stay.Payment.Contracts.csproj"
+    },
+    "Stay.Promotion.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../../src/Modules/Promotion/Stay.Promotion.Contracts/Stay.Promotion.Contracts.csproj",
+      "msbuildProject": "../../src/Modules/Promotion/Stay.Promotion.Contracts/Stay.Promotion.Contracts.csproj"
+    },
+    "Stay.Promotion.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../../src/Modules/Promotion/Stay.Promotion.Infrastructure/Stay.Promotion.Infrastructure.csproj",
+      "msbuildProject": "../../src/Modules/Promotion/Stay.Promotion.Infrastructure/Stay.Promotion.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {

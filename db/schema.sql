@@ -322,6 +322,7 @@ CREATE TABLE guest.guest_profile (
     preferred_currency  CHAR(3),
     created_at          TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at          TIMESTAMPTZ NOT NULL DEFAULT now(),
+    erased_at           TIMESTAMPTZ,                        -- set when PII is anonymized on a data-subject erasure (BR-8)
     row_version         INTEGER     NOT NULL DEFAULT 0
 );
 
@@ -375,6 +376,17 @@ CREATE TABLE guest.loyalty_ledger (
 );
 CREATE INDEX idx_loyalty_ledger_guest ON guest.loyalty_ledger (guest_id);
 
+-- Outbox for the guest context: a data-subject erasure (BR-8) emits stay.guest.erased so the
+-- admin audit log and the booking contact snapshots react without a cross-context write.
+CREATE TABLE guest.outbox_message (
+    id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    type         TEXT        NOT NULL,
+    payload      JSONB       NOT NULL,
+    occurred_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+    processed_at TIMESTAMPTZ
+);
+CREATE INDEX idx_guest_outbox_unprocessed ON guest.outbox_message (occurred_at) WHERE processed_at IS NULL;
+
 -- ============================================================================
 -- CONTEXT: booking  (the transactional core: cart/hold/reservation, saga)
 -- ============================================================================
@@ -396,6 +408,9 @@ CREATE TABLE booking.booking (
     total_amount    NUMERIC(12,2) NOT NULL DEFAULT 0,
     hold_expires_at TIMESTAMPTZ,                           -- set while HELD (BR-3)
     cancellation_snapshot JSONB,                           -- frozen policy at booking time (BR-2/BR-4)
+    coupon_code     TEXT,                                  -- xref: promotion.coupon; redeemed atomically at confirm
+    points_redeemed INT         NOT NULL DEFAULT 0,        -- loyalty points spent on this booking; redeemed atomically at confirm
+    loyalty_discount NUMERIC(12,2) NOT NULL DEFAULT 0,     -- frozen INR value of points_redeemed (BR-2)
     source          TEXT        NOT NULL DEFAULT 'WEB' CHECK (source IN ('WEB','MOBILE','PARTNER')),
     partner_id      BIGINT,                                -- xref: admin/partner when source=PARTNER
     created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -666,6 +681,33 @@ CREATE TABLE reviews.outbox_message (
     occurred_at TIMESTAMPTZ NOT NULL DEFAULT now(), processed_at TIMESTAMPTZ
 );
 CREATE INDEX idx_reviews_outbox_unprocessed ON reviews.outbox_message (occurred_at) WHERE processed_at IS NULL;
+
+-- ============================================================================
+-- CONTEXT: loyalty  (guest points accounts + append-only ledger)
+-- ============================================================================
+
+CREATE SCHEMA IF NOT EXISTS loyalty;
+
+CREATE TABLE loyalty.account (
+    id         BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    guest_id   BIGINT NOT NULL UNIQUE,                    -- xref: guest.guest_profile
+    balance    INT    NOT NULL DEFAULT 0 CHECK (balance >= 0),  -- backstop: never overdraw
+    tier       TEXT   NOT NULL DEFAULT 'BRONZE',
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Append-only ledger; idempotency_key makes each earn/redeem apply exactly once (BR-5).
+CREATE TABLE loyalty.ledger (
+    id              BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    account_id      BIGINT NOT NULL REFERENCES loyalty.account(id),
+    type            TEXT   NOT NULL CHECK (type IN ('EARN','REDEEM','ADJUST')),
+    points          INT    NOT NULL,                      -- signed: +earn, -redeem
+    reason          TEXT,
+    reference       TEXT,                                  -- e.g. booking ref
+    idempotency_key TEXT   NOT NULL UNIQUE,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX idx_loyalty_ledger_account ON loyalty.ledger (account_id, created_at);
 
 -- ============================================================================
 -- CONTEXT: promotion  (platform & host promotions, coupons, redemptions)

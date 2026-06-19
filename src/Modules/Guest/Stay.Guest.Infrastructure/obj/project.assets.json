@@ -200,6 +200,9 @@
       "Stay.Guest.Contracts/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Stay.BuildingBlocks": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Stay.Guest.Contracts.dll": {}
         },

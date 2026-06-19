@@ -125,3 +125,5 @@ C:\Projects\Stay\src\Stay.Api\bin\Debug\net10.0\Stay.Promotion.Contracts.dll
 C:\Projects\Stay\src\Stay.Api\bin\Debug\net10.0\Stay.Promotion.Infrastructure.dll
 C:\Projects\Stay\src\Stay.Api\bin\Debug\net10.0\Stay.Promotion.Infrastructure.pdb
 C:\Projects\Stay\src\Stay.Api\bin\Debug\net10.0\Stay.Promotion.Contracts.pdb
+C:\Projects\Stay\src\Stay.Api\bin\Debug\net10.0\Stay.Loyalty.Infrastructure.dll
+C:\Projects\Stay\src\Stay.Api\bin\Debug\net10.0\Stay.Loyalty.Infrastructure.pdb

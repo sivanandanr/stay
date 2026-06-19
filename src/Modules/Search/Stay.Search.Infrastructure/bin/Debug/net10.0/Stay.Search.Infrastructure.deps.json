@@ -8,8 +8,11 @@
     ".NETCoreApp,Version=v10.0": {
       "Stay.Search.Infrastructure/1.0.0": {
         "dependencies": {
+          "Stay.Booking.Contracts": "1.0.0",
           "Stay.BuildingBlocks": "1.0.0",
-          "Stay.Catalog.Contracts": "1.0.0"
+          "Stay.Catalog.Contracts": "1.0.0",
+          "Stay.Channel.Contracts": "1.0.0",
+          "Stay.Reviews.Contracts": "1.0.0"
         },
         "runtime": {
           "Stay.Search.Infrastructure.dll": {}
@@ -185,6 +188,17 @@
           }
         }
       },
+      "Stay.Booking.Contracts/1.0.0": {
+        "dependencies": {
+          "Stay.BuildingBlocks": "1.0.0"
+        },
+        "runtime": {
+          "Stay.Booking.Contracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Stay.BuildingBlocks/1.0.0": {
         "dependencies": {
           "Confluent.Kafka": "2.6.1",
@@ -206,6 +220,28 @@
         },
         "runtime": {
           "Stay.Catalog.Contracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Stay.Channel.Contracts/1.0.0": {
+        "dependencies": {
+          "Stay.BuildingBlocks": "1.0.0"
+        },
+        "runtime": {
+          "Stay.Channel.Contracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Stay.Reviews.Contracts/1.0.0": {
+        "dependencies": {
+          "Stay.BuildingBlocks": "1.0.0"
+        },
+        "runtime": {
+          "Stay.Reviews.Contracts.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -261,12 +297,27 @@
       "path": "npgsql/10.0.3",
       "hashPath": "npgsql.10.0.3.nupkg.sha512"
     },
+    "Stay.Booking.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Stay.BuildingBlocks/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "Stay.Catalog.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Stay.Channel.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Stay.Reviews.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

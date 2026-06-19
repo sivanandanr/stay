@@ -55,6 +55,18 @@ public sealed record ChannelAriApplied(
     public string EventType => "stay.channel.ari-applied";
 }
 
+/// <summary>
+/// Emitted when an applied ARI message lowers a property's lead-in nightly rate, so the search read
+/// model can refresh its "from" price (event-carried state — the property id + the candidate price ride
+/// on the event, no read-back into ARI). The search projection keeps the minimum seen (a "from" floor).
+/// </summary>
+public sealed record PropertyPriceChanged(
+    Guid EventId, long PropertyId, decimal FromPrice, string Currency, DateTimeOffset OccurredAt)
+    : IIntegrationEvent
+{
+    public string EventType => "stay.channel.property-price-changed";
+}
+
 // ── Channel client port (platform → channel manager) ──────────────────────────
 
 /// <summary>Availability the channel manager reports for one night of a mapped external room.</summary>

@@ -254,12 +254,36 @@
       "Stay.Guest.Contracts/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Stay.BuildingBlocks": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Stay.Guest.Contracts.dll": {}
         },
         "runtime": {
           "bin/placeholder/Stay.Guest.Contracts.dll": {}
         }
+      },
+      "Stay.Loyalty.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Confluent.Kafka": "2.6.1",
+          "Dapper": "2.1.79",
+          "Npgsql": "10.0.3",
+          "Stay.Booking.Contracts": "1.0.0",
+          "Stay.BuildingBlocks": "1.0.0",
+          "Stay.Guest.Contracts": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Stay.Loyalty.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Stay.Loyalty.Infrastructure.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "Stay.Payment.Contracts/1.0.0": {
         "type": "project",
@@ -273,6 +297,35 @@
         "runtime": {
           "bin/placeholder/Stay.Payment.Contracts.dll": {}
         }
+      },
+      "Stay.Promotion.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Stay.Promotion.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Stay.Promotion.Contracts.dll": {}
+        }
+      },
+      "Stay.Promotion.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Dapper": "2.1.79",
+          "Npgsql": "10.0.3",
+          "Stay.BuildingBlocks": "1.0.0",
+          "Stay.Promotion.Contracts": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Stay.Promotion.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Stay.Promotion.Infrastructure.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -457,14 +510,30 @@
       "path": "../../Guest/Stay.Guest.Contracts/Stay.Guest.Contracts.csproj",
       "msbuildProject": "../../Guest/Stay.Guest.Contracts/Stay.Guest.Contracts.csproj"
     },
+    "Stay.Loyalty.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../../Loyalty/Stay.Loyalty.Infrastructure/Stay.Loyalty.Infrastructure.csproj",
+      "msbuildProject": "../../Loyalty/Stay.Loyalty.Infrastructure/Stay.Loyalty.Infrastructure.csproj"
+    },
     "Stay.Payment.Contracts/1.0.0": {
       "type": "project",
       "path": "../../Payment/Stay.Payment.Contracts/Stay.Payment.Contracts.csproj",
       "msbuildProject": "../../Payment/Stay.Payment.Contracts/Stay.Payment.Contracts.csproj"
+    },
+    "Stay.Promotion.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../../Promotion/Stay.Promotion.Contracts/Stay.Promotion.Contracts.csproj",
+      "msbuildProject": "../../Promotion/Stay.Promotion.Contracts/Stay.Promotion.Contracts.csproj"
+    },
+    "Stay.Promotion.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../../Promotion/Stay.Promotion.Infrastructure/Stay.Promotion.Infrastructure.csproj",
+      "msbuildProject": "../../Promotion/Stay.Promotion.Infrastructure/Stay.Promotion.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "Confluent.Kafka >= 2.6.1",
       "Dapper >= 2.1.79",
       "Npgsql >= 10.0.3",
       "Stay.Ari.Infrastructure >= 1.0.0",
@@ -472,7 +541,9 @@
       "Stay.Booking.Contracts >= 1.0.0",
       "Stay.BuildingBlocks >= 1.0.0",
       "Stay.Guest.Contracts >= 1.0.0",
-      "Stay.Payment.Contracts >= 1.0.0"
+      "Stay.Loyalty.Infrastructure >= 1.0.0",
+      "Stay.Payment.Contracts >= 1.0.0",
+      "Stay.Promotion.Infrastructure >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -524,8 +595,14 @@
             "C:\\Projects\\Stay\\src\\Modules\\Guest\\Stay.Guest.Contracts\\Stay.Guest.Contracts.csproj": {
               "projectPath": "C:\\Projects\\Stay\\src\\Modules\\Guest\\Stay.Guest.Contracts\\Stay.Guest.Contracts.csproj"
             },
+            "C:\\Projects\\Stay\\src\\Modules\\Loyalty\\Stay.Loyalty.Infrastructure\\Stay.Loyalty.Infrastructure.csproj": {
+              "projectPath": "C:\\Projects\\Stay\\src\\Modules\\Loyalty\\Stay.Loyalty.Infrastructure\\Stay.Loyalty.Infrastructure.csproj"
+            },
             "C:\\Projects\\Stay\\src\\Modules\\Payment\\Stay.Payment.Contracts\\Stay.Payment.Contracts.csproj": {
               "projectPath": "C:\\Projects\\Stay\\src\\Modules\\Payment\\Stay.Payment.Contracts\\Stay.Payment.Contracts.csproj"
+            },
+            "C:\\Projects\\Stay\\src\\Modules\\Promotion\\Stay.Promotion.Infrastructure\\Stay.Promotion.Infrastructure.csproj": {
+              "projectPath": "C:\\Projects\\Stay\\src\\Modules\\Promotion\\Stay.Promotion.Infrastructure\\Stay.Promotion.Infrastructure.csproj"
             }
           }
         }
@@ -548,6 +625,10 @@
         "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
+          "Confluent.Kafka": {
+            "target": "Package",
+            "version": "[2.6.1, )"
+          },
           "Dapper": {
             "target": "Package",
             "version": "[2.1.79, )"

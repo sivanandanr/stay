@@ -33,6 +33,9 @@
     <Project Path="src/Modules/Guest/Stay.Guest.Contracts/Stay.Guest.Contracts.csproj" />
     <Project Path="src/Modules/Guest/Stay.Guest.Infrastructure/Stay.Guest.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/Modules/Loyalty/">
+    <Project Path="src/Modules/Loyalty/Stay.Loyalty.Infrastructure/Stay.Loyalty.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/Modules/Payment/">
     <Project Path="src/Modules/Payment/Stay.Payment.Contracts/Stay.Payment.Contracts.csproj" />
     <Project Path="src/Modules/Payment/Stay.Payment.Infrastructure/Stay.Payment.Infrastructure.csproj" />

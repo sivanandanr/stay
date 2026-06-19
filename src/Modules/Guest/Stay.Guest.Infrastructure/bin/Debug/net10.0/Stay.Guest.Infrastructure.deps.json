@@ -203,6 +203,9 @@
         }
       },
       "Stay.Guest.Contracts/1.0.0": {
+        "dependencies": {
+          "Stay.BuildingBlocks": "1.0.0"
+        },
         "runtime": {
           "Stay.Guest.Contracts.dll": {
             "assemblyVersion": "1.0.0.0",

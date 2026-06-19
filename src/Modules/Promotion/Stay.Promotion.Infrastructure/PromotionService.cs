@@ -134,6 +134,54 @@ public sealed class PromotionService(string connectionString)
         return Result<DiscountQuote>.Success(new DiscountQuote(coupon.CouponId, discount, amount - discount, currency));
     }
 
+    /// <summary>
+    /// Redeems a coupon WITHIN the caller's transaction (the booking confirm saga, atomic with the
+    /// inventory commit — the §1.7 consistency unit is broadened to include this redemption by design).
+    /// The discount itself was frozen at hold (BR-2) and is passed in as <paramref name="discountAmount"/>;
+    /// this only enforces the SUPPLY constraints (active, window, max-redemptions, budget) under the
+    /// coupon row lock, and records the redemption once per booking. A failure rolls back the whole
+    /// confirm — no half-applied discount.
+    /// </summary>
+    public async Task<Result<decimal>> RedeemInTransactionAsync(
+        NpgsqlConnection conn, NpgsqlTransaction tx, string code, long bookingId, long? guestId,
+        decimal discountAmount, DateTimeOffset asOf, CancellationToken ct = default)
+    {
+        var coupon = await LoadAsync(conn, tx, code, ct);
+        if (coupon is null)
+            return Error.NotFound("coupon-not-found", $"Coupon '{code}' was not found.");
+
+        var existing = await conn.ExecuteScalarAsync<decimal?>(new CommandDefinition(
+            "SELECT amount FROM promotion.coupon_redemption WHERE coupon_id = @CouponId AND booking_id = @bookingId",
+            new { coupon.CouponId, bookingId }, tx, cancellationToken: ct));
+        if (existing is { } recorded)
+            return Result<decimal>.Success(recorded); // idempotent — already redeemed for this booking
+
+        if (coupon.CouponStatus != "ACTIVE")
+            return Error.Conflict("coupon-inactive", "This coupon is not active.");
+        if (coupon.PromotionStatus != "ACTIVE")
+            return Error.Conflict("promotion-inactive", "This promotion is not active.");
+        if (coupon.ValidFrom is { } from && asOf.UtcDateTime < from)
+            return Error.Conflict("outside-window", "This promotion has not started yet.");
+        if (coupon.ValidTo is { } to && asOf.UtcDateTime > to)
+            return Error.Conflict("outside-window", "This promotion has ended.");
+        if (coupon.MaxRedemptions is { } max && coupon.RedeemedCount >= max)
+            return Error.Conflict("max-redemptions-reached", "This coupon has reached its redemption limit.");
+
+        var spent = await SpentAsync(conn, tx, coupon.PromotionId, ct);
+        if (coupon.Budget is { } budget && spent + discountAmount > budget)
+            return Error.Conflict("budget-exhausted", "This promotion's budget is exhausted.");
+
+        await conn.ExecuteAsync(new CommandDefinition("""
+            INSERT INTO promotion.coupon_redemption (coupon_id, booking_id, guest_id, amount)
+            VALUES (@CouponId, @bookingId, @guestId, @discountAmount)
+            """, new { coupon.CouponId, bookingId, guestId, discountAmount }, tx, cancellationToken: ct));
+        await conn.ExecuteAsync(new CommandDefinition(
+            "UPDATE promotion.coupon SET redeemed_count = redeemed_count + 1 WHERE id = @CouponId",
+            new { coupon.CouponId }, tx, cancellationToken: ct));
+
+        return Result<decimal>.Success(discountAmount);
+    }
+
     private static async Task<CouponRow?> LoadAsync(NpgsqlConnection conn, NpgsqlTransaction? tx, string code, CancellationToken ct) =>
         await conn.QuerySingleOrDefaultAsync<CouponRow>(new CommandDefinition($"""
             SELECT c.id AS CouponId, c.status AS CouponStatus, c.max_redemptions AS MaxRedemptions, c.redeemed_count AS RedeemedCount,

@@ -32,7 +32,8 @@ public sealed class PaymentModule : IModule
             ?? throw new InvalidOperationException("Missing connection string 'Stay'.");
         services.AddSingleton(new PaymentWebhookService(connectionString));
         services.AddSingleton(sp => new PaymentReconciler(connectionString, sp.GetRequiredService<IPaymentGateway>()));
-        services.AddSingleton(sp => new LedgerReconciler(connectionString, sp.GetRequiredService<IPaymentGateway>()));
+        services.AddSingleton(sp => new LedgerReconciler(
+            connectionString, sp.GetRequiredService<IPaymentGateway>(), sp.GetRequiredService<IPayoutGateway>()));
         services.AddSingleton(sp => new PayoutService(connectionString, sp.GetRequiredService<IPayoutGateway>()));
         services.AddSingleton(new DisputeService(connectionString));
         services.AddHostedService<PaymentReconcilerService>();

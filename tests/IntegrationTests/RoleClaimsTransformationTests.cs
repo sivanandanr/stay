@@ -30,7 +30,8 @@ public sealed class RoleClaimsTransformationTests : IAsyncLifetime
     public Task DisposeAsync() => _postgres.DisposeAsync().AsTask();
 
     private RoleClaimsTransformation NewTransformation() =>
-        new(_roles, new MemoryCache(new MemoryCacheOptions()));
+        new(_roles, new MemoryCache(new MemoryCacheOptions()),
+            Microsoft.Extensions.Logging.Abstractions.NullLogger<RoleClaimsTransformation>.Instance);
 
     private static ClaimsPrincipal AuthenticatedAs(string sub) =>
         new(new ClaimsIdentity([new Claim("sub", sub)], authenticationType: "Test"));

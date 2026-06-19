@@ -16,3 +16,9 @@ C:\Projects\Stay\src\Modules\Search\Stay.Search.Infrastructure\obj\Debug\net10.0
 C:\Projects\Stay\src\Modules\Search\Stay.Search.Infrastructure\obj\Debug\net10.0\ref\Stay.Search.Infrastructure.dll
 C:\Projects\Stay\src\Modules\Search\Stay.Search.Infrastructure\bin\Debug\net10.0\Stay.Catalog.Contracts.dll
 C:\Projects\Stay\src\Modules\Search\Stay.Search.Infrastructure\bin\Debug\net10.0\Stay.Catalog.Contracts.pdb
+C:\Projects\Stay\src\Modules\Search\Stay.Search.Infrastructure\bin\Debug\net10.0\Stay.Booking.Contracts.dll
+C:\Projects\Stay\src\Modules\Search\Stay.Search.Infrastructure\bin\Debug\net10.0\Stay.Booking.Contracts.pdb
+C:\Projects\Stay\src\Modules\Search\Stay.Search.Infrastructure\bin\Debug\net10.0\Stay.Reviews.Contracts.dll
+C:\Projects\Stay\src\Modules\Search\Stay.Search.Infrastructure\bin\Debug\net10.0\Stay.Reviews.Contracts.pdb
+C:\Projects\Stay\src\Modules\Search\Stay.Search.Infrastructure\bin\Debug\net10.0\Stay.Channel.Contracts.dll
+C:\Projects\Stay\src\Modules\Search\Stay.Search.Infrastructure\bin\Debug\net10.0\Stay.Channel.Contracts.pdb

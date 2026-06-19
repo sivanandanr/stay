@@ -32,7 +32,8 @@ var modules = new[]
         Assembly.Load("Stay.Guest.Infrastructure"),
         Assembly.Load("Stay.Reviews.Infrastructure"),
         Assembly.Load("Stay.Channel.Infrastructure"),
-        Assembly.Load("Stay.Promotion.Infrastructure")
+        Assembly.Load("Stay.Promotion.Infrastructure"),
+        Assembly.Load("Stay.Loyalty.Infrastructure")
     }
     .SelectMany(a => a.GetTypes())
     .Where(t => typeof(IModule).IsAssignableFrom(t) && t is { IsAbstract: false, IsInterface: false })
@@ -53,7 +54,7 @@ builder.Services.AddOutbox(o =>
     // Every writing context's outbox is drained to Kafka so all event pipelines flow
     // (catalog → search/audit; booking → reviews/notifications; payment/ari downstream;
     // reviews → audit). Each schema must have a reviews.outbox_message-shaped table (schema.sql).
-    o.Schemas         = ["catalog", "ari", "booking", "payment", "reviews", "channel"];
+    o.Schemas         = ["catalog", "ari", "booking", "payment", "reviews", "channel", "guest"];
 });
 builder.Services.AddOutboxConsumer();
 

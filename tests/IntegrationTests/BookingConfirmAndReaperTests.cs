@@ -4,7 +4,9 @@ using Stay.Ari.Infrastructure.Inventory;
 using Stay.Ari.Infrastructure.Pricing;
 using Stay.Booking.Contracts;
 using Stay.Booking.Infrastructure.Holds;
+using Stay.Loyalty.Infrastructure;
 using Stay.Payment.Infrastructure;
+using Stay.Promotion.Infrastructure;
 using Testcontainers.PostgreSql;
 
 namespace Stay.IntegrationTests;
@@ -34,8 +36,8 @@ public sealed class BookingConfirmAndReaperTests : IAsyncLifetime
         await conn.ExecuteAsync(AriSchema.Ddl);
         await conn.ExecuteAsync(BookingSchema.Ddl);
         await conn.ExecuteAsync(PaymentSchema.Ddl);
-        _hold = new BookingHoldService(_postgres.GetConnectionString());
-        _confirm = new BookingConfirmService(_postgres.GetConnectionString(), new FakePaymentGateway());
+        _hold = new BookingHoldService(_postgres.GetConnectionString(), new PromotionService(_postgres.GetConnectionString()), new LoyaltyService(_postgres.GetConnectionString()));
+        _confirm = new BookingConfirmService(_postgres.GetConnectionString(), new FakePaymentGateway(), new PromotionService(_postgres.GetConnectionString()), new LoyaltyService(_postgres.GetConnectionString()));
         _reaper = new HoldReaper(_postgres.GetConnectionString());
     }
 

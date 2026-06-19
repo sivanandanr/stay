@@ -26,7 +26,8 @@ public sealed class StayCompletionService(string connectionString)
 
         var candidates = await conn.QueryAsync<Candidate>(new CommandDefinition("""
             SELECT b.id AS BookingId, b.guest_id AS GuestId, b.property_id AS PropertyId,
-                   br.check_out AS CheckOut, b.cancellation_snapshot AS Snapshot
+                   br.check_out AS CheckOut, b.cancellation_snapshot AS Snapshot,
+                   b.total_amount AS TotalAmount, b.currency AS Currency
             FROM booking.booking b
             JOIN booking.booking_room br ON br.booking_id = b.id AND br.status = 'ACTIVE'
             WHERE b.status = 'CONFIRMED' AND b.cancellation_snapshot IS NOT NULL
@@ -53,7 +54,7 @@ public sealed class StayCompletionService(string connectionString)
                 "INSERT INTO booking.status_history (booking_id, from_status, to_status) VALUES (@BookingId, 'CONFIRMED', 'COMPLETED')",
                 new { c.BookingId }, tx, cancellationToken: ct));
 
-            var @event = new BookingCompleted(Guid.NewGuid(), c.BookingId, c.GuestId, c.PropertyId, now);
+            var @event = new BookingCompleted(Guid.NewGuid(), c.BookingId, c.GuestId, c.PropertyId, now, c.TotalAmount, c.Currency);
             await conn.ExecuteAsync(new CommandDefinition(
                 "INSERT INTO booking.outbox_message (type, payload) VALUES (@type, CAST(@payload AS jsonb))",
                 new { type = @event.EventType, payload = JsonSerializer.Serialize(@event) }, tx, cancellationToken: ct));
@@ -71,5 +72,6 @@ public sealed class StayCompletionService(string connectionString)
         return new DateTimeOffset(local, tz.GetUtcOffset(local));
     }
 
-    private sealed record Candidate(long BookingId, long GuestId, long PropertyId, DateOnly CheckOut, string Snapshot);
+    private sealed record Candidate(
+        long BookingId, long GuestId, long PropertyId, DateOnly CheckOut, string Snapshot, decimal TotalAmount, string Currency);
 }

@@ -6,7 +6,9 @@ using Stay.Ari.Infrastructure.Pricing;
 using Stay.Booking.Contracts;
 using Stay.Booking.Infrastructure.Holds;
 using Stay.Payment.Contracts;
+using Stay.Loyalty.Infrastructure;
 using Stay.Payment.Infrastructure;
+using Stay.Promotion.Infrastructure;
 using Testcontainers.PostgreSql;
 
 namespace Stay.IntegrationTests;
@@ -34,7 +36,7 @@ public sealed class BookingCancellationTests : IAsyncLifetime
         await conn.ExecuteAsync(AriSchema.Ddl);
         await conn.ExecuteAsync(BookingSchema.Ddl);
         await conn.ExecuteAsync(PaymentSchema.Ddl);
-        _hold = new BookingHoldService(_postgres.GetConnectionString());
+        _hold = new BookingHoldService(_postgres.GetConnectionString(), new PromotionService(_postgres.GetConnectionString()), new LoyaltyService(_postgres.GetConnectionString()));
     }
 
     public Task DisposeAsync() => _postgres.DisposeAsync().AsTask();
@@ -55,7 +57,7 @@ public sealed class BookingCancellationTests : IAsyncLifetime
             Guid.NewGuid().ToString("N"), 1, "g@example.com", 99, RoomTypeId, RatePlanId,
             CheckIn, CheckOut, 1, 2, 0, TimeSpan.FromMinutes(15), snapshot));
         var bookingId = held.Value!.BookingId;
-        await new BookingConfirmService(_postgres.GetConnectionString(), new FakePaymentGateway()).ConfirmAsync(bookingId);
+        await new BookingConfirmService(_postgres.GetConnectionString(), new FakePaymentGateway(), new PromotionService(_postgres.GetConnectionString()), new LoyaltyService(_postgres.GetConnectionString())).ConfirmAsync(bookingId);
         return bookingId;
     }
 
@@ -191,6 +193,10 @@ public sealed class BookingCancellationTests : IAsyncLifetime
 
     private sealed class RefundFailingGateway : IPaymentGateway
     {
+        public Task<OrderResult> CreateOrderAsync(OrderRequest r, CancellationToken ct = default) =>
+            Task.FromResult(new OrderResult($"order_{r.IdempotencyKey}", "rzp_test", r.Amount, r.Currency));
+        public Task<VerificationResult> VerifyCheckoutAsync(CheckoutProof p, string key, CancellationToken ct = default) =>
+            Task.FromResult(VerificationResult.Ok(p.PaymentId));
         public Task<AuthorizationResult> AuthorizeAsync(PaymentInstruction i, CancellationToken ct = default) =>
             Task.FromResult(AuthorizationResult.Approved($"auth_{i.IdempotencyKey}"));
         public Task<CaptureResult> CaptureAsync(string pspRef, string key, CancellationToken ct = default) =>
@@ -199,5 +205,7 @@ public sealed class BookingCancellationTests : IAsyncLifetime
             Task.FromResult(RefundResult.Failed("psp_unavailable"));
         public Task<GatewayPaymentStatus> GetStatusAsync(string pspRef, CancellationToken ct = default) =>
             Task.FromResult(GatewayPaymentStatus.Captured);
+        public Task<GatewayRefundStatus> GetRefundStatusAsync(string refundPspRef, CancellationToken ct = default) =>
+            Task.FromResult(GatewayRefundStatus.Processed);
     }
 }

@@ -148,6 +148,39 @@ public sealed class InventoryRepository
         return affected == nights ? HoldOutcome.Held : HoldOutcome.SoldOut;
     }
 
+    /// <summary>
+    /// Read-only availability for the funnel's rooms-and-rates screen: the number of units bookable
+    /// across the WHOLE night range <c>[checkIn, checkOut)</c> (the bottleneck night). Returns 0 when a
+    /// night has no inventory row or any night is stop-sell — i.e. the stay isn't fully bookable. This
+    /// is a non-authoritative preview; the atomic hold (BR-1) remains the only source of truth.
+    /// </summary>
+    public async Task<int> AvailableUnitsAsync(
+        NpgsqlConnection conn, long roomTypeId, DateOnly checkIn, DateOnly checkOut,
+        NpgsqlTransaction? tx = null, CancellationToken ct = default)
+    {
+        var nights = checkOut.DayNumber - checkIn.DayNumber;
+        if (nights <= 0)
+            return 0;
+
+        const string sql = """
+            SELECT COUNT(*)::int AS Nights,
+                   COALESCE(MIN(total_allotment - units_sold - units_held), 0)::int AS MinAvailable,
+                   COALESCE(BOOL_OR(stop_sell), false) AS AnyStopSell
+            FROM ari.inventory_calendar
+            WHERE room_type_id = @roomTypeId AND stay_date >= @checkIn AND stay_date < @checkOut
+            """;
+
+        var row = await conn.QuerySingleAsync<AvailabilityRow>(new CommandDefinition(
+            sql, new { roomTypeId, checkIn, checkOut }, tx, cancellationToken: ct));
+
+        if (row.Nights != nights || row.AnyStopSell)
+            return 0; // a night is missing or stopped → not bookable across the whole stay
+
+        return Math.Max(0, row.MinAvailable);
+    }
+
+    private sealed record AvailabilityRow(int Nights, int MinAvailable, bool AnyStopSell);
+
     /// <summary>Releases a previously held quantity across the night range (e.g. hold expiry/cancel).</summary>
     public async Task ReleaseAsync(
         NpgsqlConnection conn, NpgsqlTransaction tx,

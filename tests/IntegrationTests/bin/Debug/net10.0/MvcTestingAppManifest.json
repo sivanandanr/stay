@@ -16,6 +16,7 @@
   "Stay.Channel.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\Stay\\src\\Modules\\Channel\\Stay.Channel.Infrastructure",
   "Stay.Guest.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\Stay\\src\\Modules\\Guest\\Stay.Guest.Contracts",
   "Stay.Guest.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\Stay\\src\\Modules\\Guest\\Stay.Guest.Infrastructure",
+  "Stay.Loyalty.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\Stay\\src\\Modules\\Loyalty\\Stay.Loyalty.Infrastructure",
   "Stay.Payment.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\Stay\\src\\Modules\\Payment\\Stay.Payment.Contracts",
   "Stay.Payment.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\Stay\\src\\Modules\\Payment\\Stay.Payment.Infrastructure",
   "Stay.Promotion.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\Stay\\src\\Modules\\Promotion\\Stay.Promotion.Contracts",

@@ -18,9 +18,11 @@ public sealed class GuestModule : IModule
         var connectionString = config.GetConnectionString("Stay")
             ?? throw new InvalidOperationException("Missing connection string 'Stay'.");
         services.AddSingleton<IGuestProvisioning>(new GuestProvisioningService(connectionString));
+        services.AddSingleton(new GuestErasureService(connectionString));
     }
 
-    public void MapEndpoints(IEndpointRouteBuilder endpoints) =>
+    public void MapEndpoints(IEndpointRouteBuilder endpoints)
+    {
         // First call provisions the profile from the token claims; subsequent calls return it.
         endpoints.MapGet("/api/v1/guests/me", async (
             ClaimsPrincipal user, IGuestProvisioning guests, CancellationToken ct) =>
@@ -34,4 +36,21 @@ public sealed class GuestModule : IModule
         })
         .RequireAuthorization()
         .WithName("GetMyGuestProfile");
+
+        // The guest exercises their right to erasure (BR-8). The actor is the guest themselves; the
+        // anonymization is audited (§10) and fans out to the booking contact snapshots via the outbox.
+        endpoints.MapPost("/api/v1/me/erasure", async (
+            ClaimsPrincipal user, IGuestProvisioning guests, GuestErasureService erasure, CancellationToken ct) =>
+        {
+            var sub = user.Subject();
+            if (string.IsNullOrWhiteSpace(sub))
+                return ResultHttpExtensions.Problem(new Error("unauthenticated", "Token has no subject claim.", ErrorType.Unauthorized));
+
+            var guest = await guests.ProvisionAsync(sub, user.Email(), user.Name(), user.EmailVerified(), ct);
+            var result = await erasure.EraseAsync(guest.GuestId, sub, ct);
+            return result.ToHttp(Results.Ok);
+        })
+        .RequireAuthorization()
+        .WithName("EraseMyData");
+    }
 }

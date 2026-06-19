@@ -13,6 +13,8 @@ public sealed class CatalogDbContext(DbContextOptions<CatalogDbContext> options)
 {
     public DbSet<Property> Properties => Set<Property>();
     public DbSet<RoomType> RoomTypes => Set<RoomType>();
+    public DbSet<Amenity> Amenities => Set<Amenity>();
+    public DbSet<PropertyAmenity> PropertyAmenities => Set<PropertyAmenity>();
     public DbSet<Host> Hosts => Set<Host>();
     public DbSet<City> Cities => Set<City>();
     public DbSet<CatalogOutboxMessage> OutboxMessages => Set<CatalogOutboxMessage>();

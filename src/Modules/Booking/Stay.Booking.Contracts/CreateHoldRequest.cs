@@ -13,7 +13,9 @@ public sealed record CreateHoldRequest(
     int Quantity,
     short Adults,
     short Children,
-    CancellationSnapshot? Cancellation = null);
+    CancellationSnapshot? Cancellation = null,
+    string? CouponCode = null,
+    int RedeemPoints = 0);
 
 /// <summary>Body for <c>POST /api/v1/bookings/{id}/cancel</c>.</summary>
 public sealed record CancelBookingRequest(string Reason);

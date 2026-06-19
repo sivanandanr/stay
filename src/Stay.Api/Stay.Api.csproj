@@ -22,6 +22,7 @@
     <ProjectReference Include="..\Modules\Reviews\Stay.Reviews.Infrastructure\Stay.Reviews.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Channel\Stay.Channel.Infrastructure\Stay.Channel.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Promotion\Stay.Promotion.Infrastructure\Stay.Promotion.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Loyalty\Stay.Loyalty.Infrastructure\Stay.Loyalty.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

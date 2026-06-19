@@ -21,7 +21,10 @@ public sealed record RatingAggregateResponse(long PropertyId, int ReviewCount, d
 /// audit trail (§10); the Admin context projects it into <c>admin.audit_log</c>.
 /// </summary>
 public sealed record ReviewPublished(
-    Guid EventId, long ReviewId, long PropertyId, string ActorSub, DateTimeOffset OccurredAt)
+    Guid EventId, long ReviewId, long PropertyId, string ActorSub, DateTimeOffset OccurredAt,
+    // Trailing-optional aggregate so the search index can refresh its rating signal without reading
+    // back into Reviews (event-carried state, BR-6); existing consumers/call sites are unaffected.
+    int ReviewCount = 0, decimal AvgOverall = 0)
     : IIntegrationEvent
 {
     public string EventType => "stay.reviews.review-published";

@@ -75,6 +75,19 @@ internal static class CatalogSchema
             row_version     INTEGER     NOT NULL DEFAULT 0
         );
 
+        CREATE TABLE catalog.amenity (
+            id        BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+            code      TEXT NOT NULL UNIQUE,
+            category  TEXT NOT NULL,
+            label     TEXT NOT NULL
+        );
+
+        CREATE TABLE catalog.property_amenity (
+            property_id BIGINT NOT NULL REFERENCES catalog.property(id),
+            amenity_id  BIGINT NOT NULL REFERENCES catalog.amenity(id),
+            PRIMARY KEY (property_id, amenity_id)
+        );
+
         CREATE TABLE catalog.outbox_message (
             id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
             type         TEXT        NOT NULL,

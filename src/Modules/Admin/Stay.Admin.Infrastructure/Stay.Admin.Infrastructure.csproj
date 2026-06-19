@@ -7,6 +7,7 @@
     <ProjectReference Include="..\..\Channel\Stay.Channel.Contracts\Stay.Channel.Contracts.csproj" />
     <ProjectReference Include="..\..\Payment\Stay.Payment.Contracts\Stay.Payment.Contracts.csproj" />
     <ProjectReference Include="..\..\Booking\Stay.Booking.Contracts\Stay.Booking.Contracts.csproj" />
+    <ProjectReference Include="..\..\Guest\Stay.Guest.Contracts\Stay.Guest.Contracts.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\Stay.BuildingBlocks.csproj" />
   </ItemGroup>
 

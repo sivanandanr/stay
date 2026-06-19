@@ -38,6 +38,8 @@
     <ProjectReference Include="..\..\src\Modules\Reviews\Stay.Reviews.Infrastructure\Stay.Reviews.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\Modules\Channel\Stay.Channel.Infrastructure\Stay.Channel.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\Modules\Promotion\Stay.Promotion.Infrastructure\Stay.Promotion.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Loyalty\Stay.Loyalty.Infrastructure\Stay.Loyalty.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Guest\Stay.Guest.Infrastructure\Stay.Guest.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\Stay.Api\Stay.Api.csproj" />
   </ItemGroup>
 
